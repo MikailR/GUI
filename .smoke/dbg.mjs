@@ -1,0 +1,13 @@
+import puppeteer from 'puppeteer-core'
+const browser = await puppeteer.launch({ executablePath: '/usr/bin/google-chrome', headless: 'new', args: ['--no-sandbox', '--disable-gpu'] })
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+const page = await browser.newPage()
+page.on('console', (m) => console.log('console', m.type(), m.text()))
+page.on('pageerror', (e) => console.log('pageerror', e.message))
+await page.setViewport({ width: 1440, height: 900 })
+await page.goto('http://localhost:4173/', { waitUntil: 'networkidle0' })
+await sleep(2800)
+console.log('icons', await page.$$eval('.dicon', (els) => els.map((e) => e.getAttribute('aria-label'))))
+console.log('html', (await page.content()).slice(0, 600))
+await page.screenshot({ path: '.smoke/dbg.png' })
+await browser.close()
