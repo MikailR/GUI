@@ -8,18 +8,18 @@ This is not a portfolio grid contest. The bar: open it on phone or laptop and fe
 
 | Branch | Tool | Model | Preview |
 |---|---|---|---|
-| [`grok-4.6`](https://github.com/MikailR/GUI/tree/grok-4.6) | Grok CLI | grok-4.6 | see [live-urls](https://github.com/MikailR/GUI/blob/main/live-urls.md) |
-| [`fable-5.1`](https://github.com/MikailR/GUI/tree/fable-5.1) | Claude Code | claude-fable-5-1 | … |
-| [`opus-5`](https://github.com/MikailR/GUI/tree/opus-5) | Claude Code | claude-opus-5 | … |
-| [`gpt-6-astra`](https://github.com/MikailR/GUI/tree/gpt-6-astra) | Codex CLI | gpt-6-astra | … |
-| [`claude-design`](https://github.com/MikailR/GUI/tree/claude-design) | Claude Code + Design MCP | claude-fable-5-1 | … |
+| [`grok-4.6`](https://github.com/MikailR/GUI/tree/grok-4.6) | Grok CLI | grok-4.6 | [live](https://mikailr.github.io/GUI/previews/grok-4.6/) |
+| [`fable-5.1`](https://github.com/MikailR/GUI/tree/fable-5.1) | Claude Code | claude-fable-5-1 | [live](https://mikailr.github.io/GUI/previews/fable-5.1/) |
+| [`opus-5`](https://github.com/MikailR/GUI/tree/opus-5) | Claude Code | claude-opus-5 | [live](https://mikailr.github.io/GUI/previews/opus-5/) |
+| [`gpt-6-astra`](https://github.com/MikailR/GUI/tree/gpt-6-astra) | Codex CLI | gpt-6-astra | [live](https://mikailr.github.io/GUI/previews/gpt-6-astra/) |
+| [`claude-design`](https://github.com/MikailR/GUI/tree/claude-design) | Claude Code + Design MCP | claude-fable-5-1 | [live](https://mikailr.github.io/GUI/previews/claude-design/) |
 
-`main` holds this comparison host + built preview snapshots under `/previews/<branch>/` when Pages is enabled.
+`main` holds this comparison host + built preview snapshots under `/previews/<branch>/`.
 
 ## How to compare
 
 1. Skim [COMPARISON.md](./COMPARISON.md) for a 1–3 sentence critique per direction.
-2. Open each live preview (GitHub Pages paths or tunnel URLs in [live-urls.md](./live-urls.md)).
+2. Open the [live comparison board](https://mikailr.github.io/GUI/) or jump to a preview above ([live-urls.md](./live-urls.md)).
 3. Or run locally from a branch:
 
 ```bash
@@ -38,12 +38,11 @@ npm run dev
 - Delight: glass/acrylic or tasteful skeuomorphism, subtle motion, keyboard shortcuts
 - Pure front-end; Vite+React/TS preferred; `npm run build` must succeed
 
-Full brief lived in the bakeoff workspace; each branch’s `PROTOTYPE.md` notes model id + visual direction.
+Each branch’s `PROTOTYPE.md` notes model id + visual direction.
 
 ## Preview host
 
-If GitHub Pages is on for `main`, open the site root for an iframe comparison board, or jump straight to:
-
+- `/` — iframe comparison board
 - `/previews/grok-4.6/`
 - `/previews/fable-5.1/`
 - `/previews/opus-5/`
