@@ -22,8 +22,8 @@
 </head>
 <body>
   <header>
-    <h1>GUI — five mini operating systems</h1>
-    <p>Same brief. Five models. Pick a frame, open fullscreen, or clone a branch. See <a href="./COMPARISON.md" style="color:var(--accent)">COMPARISON.md</a> and <a href="./live-urls.md" style="color:var(--accent)">live-urls.md</a>.</p>
+    <h1>GUI — OS desktop bakeoff (+ Win98×XP iteration)</h1>
+    <p>Same brief. Five benchmarks + one Win98×XP iteration. Pick a frame, open fullscreen, or clone a branch. See <a href="./COMPARISON.md" style="color:var(--accent)">COMPARISON.md</a> and <a href="./live-urls.md" style="color:var(--accent)">live-urls.md</a>.</p>
   </header>
   <div class="grid" id="grid"></div>
   <script>
@@ -33,6 +33,7 @@
       { id: 'opus-5', tool: 'Claude · opus-5' },
       { id: 'gpt-6-astra', tool: 'Codex · gpt-6-astra' },
       { id: 'claude-design', tool: 'Claude Design MCP · fable-5-1' },
+      { id: 'win98-xp', tool: 'Codex · gpt-6-astra · Win98×XP iteration' },
     ];
     const grid = document.getElementById('grid');
     for (const b of branches) {

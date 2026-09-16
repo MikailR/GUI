@@ -10,6 +10,7 @@
 | opus-5 | https://mikailr.github.io/GUI/previews/opus-5/ |
 | gpt-6-astra | https://mikailr.github.io/GUI/previews/gpt-6-astra/ |
 | claude-design | https://mikailr.github.io/GUI/previews/claude-design/ |
+| win98-xp | https://mikailr.github.io/GUI/previews/win98-xp/ |
 
 ## Cloudflare quick tunnel (box, ephemeral)
 
@@ -23,5 +24,6 @@ Base: https://covered-pharmacies-rap-cas.trycloudflare.com
 | opus-5 | https://covered-pharmacies-rap-cas.trycloudflare.com/previews/opus-5/ |
 | gpt-6-astra | https://covered-pharmacies-rap-cas.trycloudflare.com/previews/gpt-6-astra/ |
 | claude-design | https://covered-pharmacies-rap-cas.trycloudflare.com/previews/claude-design/ |
+| win98-xp | https://covered-pharmacies-rap-cas.trycloudflare.com/previews/win98-xp/ |
 
 Repo: https://github.com/MikailR/GUI
