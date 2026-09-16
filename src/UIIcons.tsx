@@ -1,0 +1,14 @@
+import type {ReactNode} from 'react';
+const icon=(paths:ReactNode)=>({size=20}:{size?:number})=><svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths}</svg>;
+export const ArrowLeft=icon(<path d="m10 5-7 7 7 7M3 12h18"/>);
+export const ArrowRight=icon(<path d="m14 5 7 7-7 7M3 12h18"/>);
+export const ArrowUp=icon(<path d="m5 10 7-7 7 7M12 3v18"/>);
+export const ChevronDown=icon(<path d="m6 9 6 6 6-6"/>);
+export const Search=icon(<><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></>);
+export const Folder=icon(<path d="M3 6h7l2 3h9v12H3z"/>);
+export const LayoutGrid=icon(<><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></>);
+export const List=icon(<path d="M8 5h13M8 12h13M8 19h13M3 5h1M3 12h1M3 19h1"/>);
+export const Volume2=icon(<><path d="m11 4-6 5H2v6h3l6 5zM15 8q5 4 0 8M18 4q9 8 0 16"/></>);
+export const Wifi=icon(<><path d="M2 8q10-9 20 0M5 12q7-6 14 0M8 16q4-4 8 0"/><circle cx="12" cy="20" r="1"/></>);
+export const Home=icon(<path d="m2 10 10-8 10 8M5 8v13h5v-7h4v7h5V8"/>);
+export const ExternalLink=icon(<path d="M14 3h7v7M21 3 11 13M10 5H4v16h16v-6"/>);
