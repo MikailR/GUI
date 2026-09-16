@@ -20,9 +20,14 @@ Warm-nocturnal desk guided by Claude Design MCP: mockup-first (desktop + phone f
 ## win98-xp (Codex · gpt-6-astra · iteration)
 **Curiosity XP** — deliberate Windows 98×XP hybrid: gray bevels, Luna blue titlebars, green Start, original bliss-inspired SVG hills. Unified Lab Explorer with **22** live experiments collected from all five prior prototypes. Mobile is a true phone-OS (home icon grid → full-screen activities with Back), not a shrunk window manager. Keeps Astra’s content hierarchy under nostalgic chrome.
 
+## win98-classic (Codex CLI · gpt-6-astra · iteration)
+**Mikail’s Personal Computer** — classic 98 gray bevels, navy active captions, teal dither, original pixel-grid icons, and a gray Start button. A unified Explorer Lab collects 22 locally implemented experiments. Mobile opens on a dimensional handheld-style surface with inset teal panels and raised icon wells; apps become full-screen activities with Back. Build and render checks pass; browser interaction validation was blocked by the execution sandbox.
+
 ## Pick guide
 - Want **classic FE-engineer wow + toys** → `fable-5.1` or `opus-5`
 - Want **tight product metaphor** → `grok-4.6`
 - Want **editorial / type-led** → `gpt-6-astra`
 - Want **design-process provenance** → `claude-design`
 - Want **Win98/XP nostalgia + unified Lab** → `win98-xp`
+
+- Want **classic Windows 98 + a tactile mobile home** → `win98-classic`
