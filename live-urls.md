@@ -12,6 +12,7 @@
 | claude-design | https://mikailr.github.io/GUI/previews/claude-design/ |
 | win98-xp | https://mikailr.github.io/GUI/previews/win98-xp/ |
 | win98-classic | https://mikailr.github.io/GUI/previews/win98-classic/ |
+| liquid-glass | https://mikailr.github.io/GUI/previews/liquid-glass/ |
 
 ## Cloudflare quick tunnel (box, ephemeral)
 
