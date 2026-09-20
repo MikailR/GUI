@@ -34,51 +34,25 @@ export default function Work({ shell, route, onRoute }: AppScreenProps) {
     </div>
   )
 
-  if (shell === 'phone' && selected) {
+  if (shell === 'phone') {
+    if (selected) {
+      return (
+        <AppPage shell={shell} title={selected.project} eyebrow={`${selected.event} · ${formatDate(selected.date)}`}>
+          <HackathonDetail hackathon={selected} />
+        </AppPage>
+      )
+    }
     return (
-      <AppPage shell={shell} title={selected.project} eyebrow={`${selected.event} · ${formatDate(selected.date)}`}>
-        <HackathonDetail hackathon={selected} />
+      <AppPage shell={shell} title="Hackathons" eyebrow={`${HACKATHONS.length} weekends · ${totalHours} hours`} toolbar={filterControl}>
+        <HackathonList list={list} selected={null} onSelect={onRoute} />
       </AppPage>
     )
   }
 
   return (
-    <AppPage
-      shell={shell}
-      title="Hackathons"
-      eyebrow={`${HACKATHONS.length} weekends · ${totalHours} hours`}
-      toolbar={filterControl}
-      flush
-    >
+    <AppPage shell={shell} title="Hackathons" eyebrow={`${HACKATHONS.length} weekends · ${totalHours} hours`} toolbar={filterControl} flush>
       <div className={`work ${selected ? 'has-selection' : ''}`}>
-        <ol className="work__list" aria-label="Hackathons">
-          {list.map((h) => (
-            <li key={h.id}>
-              <button
-                type="button"
-                className={`work__row ${selected?.id === h.id ? 'is-selected' : ''}`}
-                style={{ '--hue': h.hue } as CSSProperties}
-                onClick={() => onRoute(h.id)}
-                aria-current={selected?.id === h.id ? 'true' : undefined}
-              >
-                <span className="work__tile" aria-hidden="true">
-                  <span className="work__tile-mark">{h.project.slice(0, 1)}</span>
-                </span>
-                <span className="work__text">
-                  <span className="work__head">
-                    <span className="work__project">{h.project}</span>
-                    <span className={`badge badge--${PLACEMENT_TONE[h.place]}`}>{h.place}</span>
-                  </span>
-                  <span className="work__meta">
-                    {h.event} · {formatDate(h.date)}
-                  </span>
-                  <span className="work__blurb">{h.blurb}</span>
-                </span>
-                <Glyph name="chevron-right" size={16} className="work__chev" />
-              </button>
-            </li>
-          ))}
-        </ol>
+        <HackathonList list={list} selected={selected?.id ?? null} onSelect={onRoute} />
 
         <div className="work__detail">
           {selected ? (
@@ -97,6 +71,45 @@ export default function Work({ shell, route, onRoute }: AppScreenProps) {
         </div>
       </div>
     </AppPage>
+  )
+}
+
+interface HackathonListProps {
+  list: Hackathon[]
+  selected: string | null
+  onSelect: (id: string) => void
+}
+
+function HackathonList({ list, selected, onSelect }: HackathonListProps) {
+  return (
+    <ol className="work__list" aria-label="Hackathons">
+      {list.map((h) => (
+        <li key={h.id}>
+          <button
+            type="button"
+            className={`work__row ${selected === h.id ? 'is-selected' : ''}`}
+            style={{ '--hue': h.hue } as CSSProperties}
+            onClick={() => onSelect(h.id)}
+            aria-current={selected === h.id ? 'true' : undefined}
+          >
+            <span className="work__tile" aria-hidden="true">
+              <span className="work__tile-mark">{h.project.slice(0, 1)}</span>
+            </span>
+            <span className="work__text">
+              <span className="work__head">
+                <span className="work__project">{h.project}</span>
+                <span className={`badge badge--${PLACEMENT_TONE[h.place]}`}>{h.place}</span>
+              </span>
+              <span className="work__meta">
+                {h.event} · {formatDate(h.date)}
+              </span>
+              <span className="work__blurb">{h.blurb}</span>
+            </span>
+            <Glyph name="chevron-right" size={16} className="work__chev" />
+          </button>
+        </li>
+      ))}
+    </ol>
   )
 }
 

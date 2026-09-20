@@ -244,13 +244,19 @@ export default function DesktopShell() {
     return () => window.removeEventListener('keydown', onKey)
   }, [state.spotlightOpen, state.focused, sheet, asleep, dispatch, requestExit, openApp, showDesktop, vp])
 
-  // Honour a deep link on first paint (e.g. arriving from the phone shell or a shared URL).
+  // Honour deep links: on first paint and whenever the hash changes (shared URLs, phone → desktop resize).
   const openedFromHash = useRef(false)
   useEffect(() => {
-    if (openedFromHash.current) return
-    openedFromHash.current = true
-    const link = parseHash(window.location.hash)
-    if (link) openApp(link.appId, link.route)
+    const openFromHash = () => {
+      const link = parseHash(window.location.hash)
+      if (link) openApp(link.appId, link.route)
+    }
+    if (!openedFromHash.current) {
+      openedFromHash.current = true
+      openFromHash()
+    }
+    window.addEventListener('hashchange', openFromHash)
+    return () => window.removeEventListener('hashchange', openFromHash)
   }, [openApp])
 
   // Keep windows inside the work area when the viewport shrinks.

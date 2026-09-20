@@ -151,6 +151,14 @@ export function searchIndex(query: string, limit = 12): SearchItem[] {
     }
     if (score > 0) scored.push({ item, score: score - GROUP_ORDER.indexOf(item.group) })
   }
-  scored.sort((a, b) => b.score - a.score)
+  // Keep results grouped: groups are ordered by their best hit, items by score within a group.
+  const bestByGroup = new Map<SearchGroup, number>()
+  for (const s of scored) bestByGroup.set(s.item.group, Math.max(bestByGroup.get(s.item.group) ?? -Infinity, s.score))
+  scored.sort((a, b) => {
+    const groupDelta = (bestByGroup.get(b.item.group) ?? 0) - (bestByGroup.get(a.item.group) ?? 0)
+    if (groupDelta !== 0) return groupDelta
+    if (a.item.group !== b.item.group) return GROUP_ORDER.indexOf(a.item.group) - GROUP_ORDER.indexOf(b.item.group)
+    return b.score - a.score
+  })
   return scored.slice(0, limit).map((s) => s.item)
 }

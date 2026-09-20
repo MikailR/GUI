@@ -37,43 +37,45 @@ export default function Trash({ shell }: AppScreenProps) {
   )
 
   return (
-    <AppPage shell={shell} title="Trash" eyebrow={items.length ? `${items.length} items` : 'Empty'} toolbar={toolbar}>
-      {items.length === 0 ? (
-        <EmptyState
-          title="Trash is empty"
-          body="Everything regrettable has been dealt with."
-          action={
-            <button type="button" className="glass-btn" onClick={() => dispatch({ type: 'TRASH_RESTORE_ALL' })}>
-              Bring it all back
-            </button>
-          }
-        />
-      ) : (
-        <ul className="trash">
-          {items.map((item) => (
-            <li key={item.id} className="trash__row">
-              <span className={`trash__kind trash__kind--${item.kind}`} aria-hidden="true">
-                <Glyph name={item.kind === 'folder' ? 'grid' : item.kind === 'app' ? 'sparkle' : 'link'} size={16} />
-              </span>
-              <span className="trash__text">
-                <span className="trash__name">{item.name}</span>
-                <span className="trash__meta">
-                  {KIND_LABEL[item.kind]} · {item.size} · deleted {item.deleted}
-                  {item.note ? <em> — {item.note}</em> : null}
-                </span>
-              </span>
-              <button
-                type="button"
-                className="trash__delete"
-                aria-label={`Delete ${item.name} permanently`}
-                onClick={() => dispatch({ type: 'TRASH_REMOVE', id: item.id })}
-              >
-                <Glyph name="close" size={14} strokeWidth={2.5} />
+    <>
+      <AppPage shell={shell} title="Trash" eyebrow={items.length ? `${items.length} items` : 'Empty'} toolbar={toolbar}>
+        {items.length === 0 ? (
+          <EmptyState
+            title="Trash is empty"
+            body="Everything regrettable has been dealt with."
+            action={
+              <button type="button" className="glass-btn" onClick={() => dispatch({ type: 'TRASH_RESTORE_ALL' })}>
+                Bring it all back
               </button>
-            </li>
-          ))}
-        </ul>
-      )}
+            }
+          />
+        ) : (
+          <ul className="trash">
+            {items.map((item) => (
+              <li key={item.id} className="trash__row">
+                <span className={`trash__kind trash__kind--${item.kind}`} aria-hidden="true">
+                  <Glyph name={item.kind === 'folder' ? 'grid' : item.kind === 'app' ? 'sparkle' : 'link'} size={16} />
+                </span>
+                <span className="trash__text">
+                  <span className="trash__name">{item.name}</span>
+                  <span className="trash__meta">
+                    {KIND_LABEL[item.kind]} · {item.size} · deleted {item.deleted}
+                    {item.note ? <em> — {item.note}</em> : null}
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  className="trash__delete"
+                  aria-label={`Delete ${item.name} permanently`}
+                  onClick={() => dispatch({ type: 'TRASH_REMOVE', id: item.id })}
+                >
+                  <Glyph name="close" size={14} strokeWidth={2.5} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </AppPage>
 
       {confirming ? (
         <div className="confirm-backdrop" onPointerDown={() => setConfirming(false)}>
@@ -93,6 +95,6 @@ export default function Trash({ shell }: AppScreenProps) {
           </div>
         </div>
       ) : null}
-    </AppPage>
+    </>
   )
 }

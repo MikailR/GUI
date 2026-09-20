@@ -92,7 +92,7 @@ export function AppScreen({ screen, closing, onClosed, onRoute, onHome, openApp 
             <span>{nested ? meta.title : 'Home'}</span>
           </button>
           <div className={`glass glass--thin glass--pill nav-title ${compact ? 'is-visible' : ''}`} aria-hidden={!compact}>
-            {title}
+            <span>{title}</span>
           </div>
           {nested ? (
             <button type="button" className="glass glass--thin glass--pill nav-pill nav-pill--icon" onClick={onHome} aria-label="Close app">

@@ -5,6 +5,7 @@ import {
   useEffect,
   useMemo,
   useReducer,
+  useSyncExternalStore,
   type Dispatch,
   type ReactNode,
 } from 'react'
@@ -408,12 +409,20 @@ export function useOs(): OsContextValue {
   return ctx
 }
 
-/** Convenience: resolved appearance ("light" | "dark") for components that need to know. */
+const DARK_QUERY = '(prefers-color-scheme: dark)'
+function subscribeDark(callback: () => void) {
+  const media = window.matchMedia(DARK_QUERY)
+  media.addEventListener('change', callback)
+  return () => media.removeEventListener('change', callback)
+}
+const getSystemDark = () => window.matchMedia(DARK_QUERY).matches
+
+/** Resolved appearance ("light" | "dark"), live-updating when the system scheme flips under "auto". */
 export function useResolvedAppearance(): 'light' | 'dark' {
   const { state } = useOs()
+  const systemDark = useSyncExternalStore(subscribeDark, getSystemDark, () => false)
   const pref = state.settings.appearance
-  const system = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-  return pref === 'auto' ? (system ? 'dark' : 'light') : pref
+  return pref === 'auto' ? (systemDark ? 'dark' : 'light') : pref
 }
 
 /** Stable helpers bound to the dispatcher for the common cross-app actions. */

@@ -46,9 +46,9 @@ export const WALLPAPERS: Record<WallpaperId, WallpaperSpec> = {
     id: 'tahoe',
     name: 'Tahoe',
     description: 'Deep navy with glass ribbons of azure, violet and coral.',
-    base: { dark: ['#070b1a', '#141c3d'], light: ['#7f9dd9', '#dbe4f7'] },
+    base: { dark: ['#070b1a', '#141c3d'], light: ['#86a6e8', '#dfe8fb'] },
     blend: 'screen',
-    lightAlpha: 0.7,
+    lightAlpha: 0.9,
     blobs: [
       { hsl: [222, 95, 62], alpha: 0.75, cx: 0.22, cy: 0.35, ax: 0.08, ay: 0.06, r: 0.34, sx: 0.05, sy: 0.04, phase: 0 },
       { hsl: [262, 90, 62], alpha: 0.6, cx: 0.55, cy: 0.6, ax: 0.1, ay: 0.08, r: 0.36, sx: 0.04, sy: 0.06, phase: 1.7 },
@@ -57,9 +57,9 @@ export const WALLPAPERS: Record<WallpaperId, WallpaperSpec> = {
       { hsl: [190, 95, 60], alpha: 0.3, cx: 0.4, cy: 0.9, ax: 0.1, ay: 0.04, r: 0.3, sx: 0.035, sy: 0.05, phase: 2.3 },
     ],
     ribbons: [
-      { hsl: [210, 100, 88], alpha: 0.28, width: 0.05, points: [[-0.1, 0.72], [0.25, 0.42], [0.55, 0.78], [1.1, 0.35]], sway: 0.05, speed: 0.06 },
-      { hsl: [300, 100, 86], alpha: 0.2, width: 0.035, points: [[-0.1, 0.3], [0.3, 0.6], [0.7, 0.2], [1.1, 0.6]], sway: 0.06, speed: 0.045 },
-      { hsl: [30, 100, 85], alpha: 0.14, width: 0.02, points: [[-0.1, 0.9], [0.4, 0.7], [0.75, 0.95], [1.1, 0.7]], sway: 0.04, speed: 0.07 },
+      { hsl: [210, 100, 88], alpha: 0.2, width: 0.05, points: [[-0.1, 0.72], [0.25, 0.42], [0.55, 0.78], [1.1, 0.35]], sway: 0.05, speed: 0.06 },
+      { hsl: [300, 100, 86], alpha: 0.15, width: 0.035, points: [[-0.1, 0.3], [0.3, 0.6], [0.7, 0.2], [1.1, 0.6]], sway: 0.06, speed: 0.045 },
+      { hsl: [30, 100, 85], alpha: 0.1, width: 0.02, points: [[-0.1, 0.9], [0.4, 0.7], [0.75, 0.95], [1.1, 0.7]], sway: 0.04, speed: 0.07 },
     ],
   },
   dawn: {
@@ -188,7 +188,7 @@ export function paintWallpaper(
   ctx.globalCompositeOperation = 'source-over'
   const vignette = ctx.createRadialGradient(width / 2, height / 2, diag * 0.25, width / 2, height / 2, diag * 0.62)
   vignette.addColorStop(0, 'rgba(0,0,0,0)')
-  vignette.addColorStop(1, appearance === 'dark' ? 'rgba(0,0,0,0.45)' : 'rgba(20,20,40,0.18)')
+  vignette.addColorStop(1, appearance === 'dark' ? 'rgba(0,0,0,0.45)' : 'rgba(20,20,40,0.1)')
   ctx.fillStyle = vignette
   ctx.fillRect(0, 0, width, height)
 }

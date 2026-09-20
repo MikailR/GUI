@@ -65,7 +65,6 @@
     inset 0 0 0 1px color-mix(in srgb, var(--glass-rim-soft) 30%, transparent),
     inset 0 0 26px -10px var(--glass-lens);
   z-index: 1;
-  mix-blend-mode: normal;
 }
 
 /* Variants */

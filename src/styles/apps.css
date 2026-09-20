@@ -687,6 +687,16 @@
 .app-page--phone .hack__hero {
   display: none;
 }
+.app-page--phone .work__list {
+  padding: 0;
+  overflow: visible;
+  gap: 8px;
+}
+.app-page--phone .work__row {
+  padding: 12px;
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 0.5px var(--separator);
+}
 
 /* ================================================================ Writing */
 

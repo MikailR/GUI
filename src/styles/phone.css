@@ -273,7 +273,7 @@
   z-index: 20;
   display: flex;
   flex-direction: column;
-  background: color-mix(in srgb, var(--surface-solid) 88%, transparent);
+  background: rgba(var(--surface-rgb), 0.88);
   -webkit-backdrop-filter: blur(40px) saturate(1.4);
   backdrop-filter: blur(40px) saturate(1.4);
   color: var(--ink);
@@ -303,6 +303,24 @@
     border-radius: 40px;
   }
 }
+/* Scrim so the status bar and pills stay legible as content scrolls beneath them. */
+.phone-app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--status-h) + var(--nav-h) + 36px);
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--surface-rgb), 0.98) 0%,
+    rgba(var(--surface-rgb), 0.95) 45%,
+    rgba(var(--surface-rgb), 0.7) 75%,
+    rgba(var(--surface-rgb), 0) 100%
+  );
+  z-index: 4;
+  pointer-events: none;
+}
 .phone-app__nav {
   position: absolute;
   top: var(--status-h);
@@ -310,7 +328,7 @@
   right: 0;
   height: var(--nav-h);
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr);
   align-items: center;
   gap: 8px;
   padding: 0 12px;
@@ -325,9 +343,10 @@
   align-items: center;
   gap: 2px;
   justify-self: start;
+  max-width: 100%;
   min-height: var(--touch);
   min-width: var(--touch);
-  padding: 0 14px 0 8px;
+  padding: 0 12px 0 6px;
   font-size: 15px;
   font-weight: 600;
   color: var(--tint);
@@ -351,17 +370,15 @@
 .nav-title {
   justify-self: center;
   min-height: 36px;
-  max-width: 52vw;
+  max-width: 38vw;
+  min-width: 0;
   padding: 0 14px;
   display: inline-flex;
   align-items: center;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: -0.01em;
   color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   opacity: 0;
   transform: translateY(-8px) scale(0.96);
   transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-spring);
@@ -371,10 +388,34 @@
   opacity: 1;
   transform: none;
 }
-.nav-title > span,
-.nav-pill > span {
+.nav-pill > span,
+.nav-title > span {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ≥ 44pt touch targets for compact controls: extend hit areas without changing the visuals. */
+.phone .glass-seg__item,
+.phone .tint,
+.phone .switch,
+.phone .trash__delete,
+.phone .toast__close {
+  position: relative;
+}
+.phone .glass-seg__item::before,
+.phone .tint::before,
+.phone .switch::before,
+.phone .trash__delete::before {
+  content: '';
+  position: absolute;
+  inset: -9px -4px;
+}
+.phone .glass-seg__item {
+  min-height: 34px;
+}
+.phone .glass-seg {
+  padding: 5px;
 }
 .phone-app__content {
   position: absolute;
@@ -413,7 +454,7 @@
 .home-indicator::after {
   content: '';
   position: absolute;
-  inset: -16px -30px;
+  inset: -20px -30px;
 }
 
 /* Phone Spotlight: a sheet from the top. */
