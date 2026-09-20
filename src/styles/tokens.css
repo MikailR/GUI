@@ -1,0 +1,207 @@
+/*
+ * Design tokens for the Liquid Glass OS.
+ *
+ * Appearance is switched with [data-appearance="light|dark"] on <html>.
+ * [data-transparency="reduced"] collapses the glass to near-opaque surfaces.
+ * Every glass surface reads from the --glass-* family so a single change
+ * re-tunes the whole material.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Type: SF-like system stack, tuned tracking for large sizes. */
+  --font-ui:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --fs-caption: 11px;
+  --fs-footnote: 12px;
+  --fs-body: 13px;
+  --fs-callout: 14px;
+  --fs-title-3: 17px;
+  --fs-title-2: 22px;
+  --fs-title-1: 28px;
+  --fs-large: 34px;
+  --fs-display: 44px;
+
+  /* Radii: continuous-corner feel via generous radii; nested elements stay concentric. */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 26px;
+  --r-window: 18px;
+  --r-pill: 999px;
+
+  /* Motion. --ease-spring is a real underdamped spring baked into linear(). */
+  --dur-fast: 140ms;
+  --dur: 260ms;
+  --dur-slow: 420ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: linear(
+    0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121,
+    1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991,
+    0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1
+  );
+  --ease-spring-soft: linear(
+    0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968,
+    0.991 43.7%, 1.006 47.5%, 1.028 55.8%, 1.032 60.4%, 1.028 66.3%, 1.014 76%, 1.003 87.1%, 1
+  );
+
+  /* Layout */
+  --menubar-h: 30px;
+  --dock-h: 72px;
+  --touch: 44px;
+
+  /* Glass geometry shared by both appearances. */
+  --glass-blur: 30px;
+  --glass-saturate: 1.65;
+  --glass-blur-thin: 18px;
+
+  /* Semantic colours (light defaults; overridden below). */
+  --system-blue: #0a7aff;
+  --system-green: #34c759;
+  --system-red: #ff453a;
+  --system-yellow: #ffcc00;
+  --system-orange: #ff9f0a;
+  --system-pink: #ff2d55;
+  --system-purple: #bf5af2;
+  --system-teal: #5ac8fa;
+  --tint: var(--system-blue);
+}
+
+/* ---------- Light appearance ---------- */
+:root,
+:root[data-appearance='light'] {
+  color-scheme: light;
+  --ink: rgba(0, 0, 0, 0.88);
+  --ink-2: rgba(0, 0, 0, 0.58);
+  --ink-3: rgba(0, 0, 0, 0.36);
+  --ink-inverse: rgba(255, 255, 255, 0.95);
+  --separator: rgba(0, 0, 0, 0.08);
+  --separator-strong: rgba(0, 0, 0, 0.14);
+
+  /* Fills for content sitting on glass (opaque-ish so text is calm). */
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-2: rgba(255, 255, 255, 0.5);
+  --surface-solid: #f6f7fa;
+  --surface-rgb: 246, 247, 250;
+  --control: rgba(0, 0, 0, 0.05);
+  --control-hover: rgba(0, 0, 0, 0.09);
+  --control-active: rgba(0, 0, 0, 0.14);
+
+  --glass-fill: rgba(255, 255, 255, 0.5);
+  --glass-fill-thin: rgba(255, 255, 255, 0.28);
+  --glass-fill-thick: rgba(255, 255, 255, 0.72);
+  --glass-rim: rgba(255, 255, 255, 0.85);
+  --glass-rim-soft: rgba(255, 255, 255, 0.45);
+  --glass-rim-shade: rgba(0, 0, 0, 0.08);
+  --glass-specular: rgba(255, 255, 255, 0.95);
+  --glass-lens: rgba(255, 255, 255, 0.35);
+  --glass-shadow:
+    0 30px 70px -28px rgba(20, 30, 60, 0.45), 0 10px 26px -14px rgba(20, 30, 60, 0.28),
+    0 1px 2px rgba(20, 30, 60, 0.08);
+  --glass-shadow-sm: 0 12px 30px -16px rgba(20, 30, 60, 0.4), 0 1px 2px rgba(20, 30, 60, 0.08);
+  --glass-text: rgba(0, 0, 0, 0.86);
+  --glass-text-2: rgba(0, 0, 0, 0.55);
+
+  --menubar-ink: rgba(255, 255, 255, 0.95);
+  --menubar-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Dark appearance ---------- */
+:root[data-appearance='dark'] {
+  color-scheme: dark;
+  --ink: rgba(255, 255, 255, 0.92);
+  --ink-2: rgba(255, 255, 255, 0.62);
+  --ink-3: rgba(255, 255, 255, 0.4);
+  --ink-inverse: rgba(0, 0, 0, 0.9);
+  --separator: rgba(255, 255, 255, 0.09);
+  --separator-strong: rgba(255, 255, 255, 0.16);
+
+  --surface: rgba(28, 30, 40, 0.62);
+  --surface-2: rgba(40, 44, 58, 0.5);
+  --surface-solid: #1c1e28;
+  --surface-rgb: 28, 30, 40;
+  --control: rgba(255, 255, 255, 0.08);
+  --control-hover: rgba(255, 255, 255, 0.13);
+  --control-active: rgba(255, 255, 255, 0.2);
+
+  --glass-fill: rgba(28, 32, 46, 0.42);
+  --glass-fill-thin: rgba(28, 32, 46, 0.24);
+  --glass-fill-thick: rgba(24, 27, 38, 0.66);
+  --glass-rim: rgba(255, 255, 255, 0.32);
+  --glass-rim-soft: rgba(255, 255, 255, 0.14);
+  --glass-rim-shade: rgba(0, 0, 0, 0.35);
+  --glass-specular: rgba(255, 255, 255, 0.6);
+  --glass-lens: rgba(255, 255, 255, 0.12);
+  --glass-shadow:
+    0 34px 80px -30px rgba(0, 0, 0, 0.75), 0 12px 30px -14px rgba(0, 0, 0, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+  --glass-shadow-sm: 0 14px 34px -16px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --glass-text: rgba(255, 255, 255, 0.92);
+  --glass-text-2: rgba(255, 255, 255, 0.6);
+
+  --system-blue: #3f8cff;
+  --menubar-ink: rgba(255, 255, 255, 0.95);
+  --menubar-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Accent tint ---------- */
+:root[data-tint='purple'] {
+  --tint: #a550e6;
+}
+:root[data-tint='pink'] {
+  --tint: #f2467d;
+}
+:root[data-tint='orange'] {
+  --tint: #f58a1f;
+}
+:root[data-tint='green'] {
+  --tint: #2fb35a;
+}
+:root[data-tint='graphite'] {
+  --tint: #7d848f;
+}
+
+/* ---------- Reduced transparency ---------- */
+:root[data-transparency='reduced'] {
+  --glass-blur: 0px;
+  --glass-blur-thin: 0px;
+  --glass-saturate: 1;
+}
+:root[data-transparency='reduced'][data-appearance='light'],
+:root[data-transparency='reduced']:not([data-appearance='dark']) {
+  --glass-fill: rgba(246, 247, 250, 0.985);
+  --glass-fill-thin: rgba(246, 247, 250, 0.96);
+  --glass-fill-thick: rgba(246, 247, 250, 1);
+  --surface: rgba(255, 255, 255, 0.98);
+}
+:root[data-transparency='reduced'][data-appearance='dark'] {
+  --glass-fill: rgba(30, 32, 42, 0.985);
+  --glass-fill-thin: rgba(30, 32, 42, 0.96);
+  --glass-fill-thick: rgba(26, 28, 36, 1);
+  --surface: rgba(30, 32, 42, 0.98);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur: 1ms;
+    --dur-slow: 1ms;
+    --ease-spring: ease-out;
+    --ease-spring-soft: ease-out;
+  }
+}
+:root[data-motion='reduced'] {
+  --dur-fast: 1ms;
+  --dur: 1ms;
+  --dur-slow: 1ms;
+  --ease-spring: ease-out;
+  --ease-spring-soft: ease-out;
+}

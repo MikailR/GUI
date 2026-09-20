@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GUI Bakeoff — OS Desktop Prototypes</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b0d12; --panel:#141824; --ink:#e8ecf4; --muted:#8b93a7; --accent:#7c9cff; --line:#22283a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: radial-gradient(1200px 600px at 20% -10%, #1a2240, var(--bg)); color: var(--ink); min-height:100vh; }
+    header { padding: 28px 24px 8px; max-width: 1400px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; margin: 0 0 6px; letter-spacing: -0.02em; }
+    p { color: var(--muted); margin: 0 0 12px; line-height: 1.5; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; padding: 16px 24px 40px; max-width: 1400px; margin: 0 auto; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; min-height: 420px; }
+    .card header { padding: 12px 14px; border-bottom: 1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .card h2 { font-size: 0.95rem; margin:0; }
+    .card a { color: var(--accent); text-decoration: none; font-size: 0.8rem; }
+    iframe { flex:1; width:100%; border:0; background:#000; min-height: 360px; }
+    .meta { font-size: 0.75rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GUI — OS desktop bakeoff (+ Classic Windows iterations)</h1>
+    <p>Same brief. Five benchmarks + Win98×XP and Classic Win98 iterations. Pick a frame, open fullscreen, or clone a branch. See <a href="./COMPARISON.md" style="color:var(--accent)">COMPARISON.md</a> and <a href="./live-urls.md" style="color:var(--accent)">live-urls.md</a>.</p>
+  </header>
+  <div class="grid" id="grid"></div>
+  <script>
+    const branches = [
+      { id: 'grok-4.6', tool: 'Grok · grok-4.6' },
+      { id: 'fable-5.1', tool: 'Claude · fable-5-1' },
+      { id: 'opus-5', tool: 'Claude · opus-5' },
+      { id: 'gpt-6-astra', tool: 'Codex · gpt-6-astra' },
+      { id: 'claude-design', tool: 'Claude Design MCP · fable-5-1' },
+      { id: 'win98-xp', tool: 'Codex · gpt-6-astra · Win98×XP iteration' },
+      { id: 'win98-classic', tool: 'Codex · gpt-6-astra · Classic Windows 98' },
+    ];
+    const grid = document.getElementById('grid');
+    for (const b of branches) {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.innerHTML = `
+        <header>
+          <div>
+            <h2>${b.id}</h2>
+            <div class="meta">${b.tool}</div>
+          </div>
+          <a href="./previews/${b.id}/" target="_blank" rel="noopener">Open ↗</a>
+        </header>
+        <iframe src="./previews/${b.id}/" title="${b.id}" loading="lazy"></iframe>
+      `;
+      grid.appendChild(card);
+    }
+  </script>
+</body>
+</html>
