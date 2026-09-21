@@ -1,0 +1,1 @@
+function e(e,t=5,n=32){let r=e/2,i=[],a=n*4;for(let e=0;e<a;e+=1){let n=e/a*Math.PI*2,o=Math.cos(n),s=Math.sin(n),c=r+r*Math.sign(o)*Math.abs(o)**(2/t),l=r+r*Math.sign(s)*Math.abs(s)**(2/t);i.push(`${c.toFixed(3)} ${l.toFixed(3)}`)}return`M${i.join(`L`)}Z`}var t=e(120);function n(e){return Math.round(e*.2237*100)/100}export{n,e as r,t};

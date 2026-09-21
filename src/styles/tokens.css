@@ -1,0 +1,279 @@
+/*
+ * Design tokens. Apple system palette, SF-like type stack, Liquid Glass material
+ * parameters. Switched by data attributes on <html>:
+ *   data-appearance   light | dark
+ *   data-accent       blue | purple | pink | red | orange | yellow | green | graphite
+ *   data-transparency full | reduced
+ *   data-motion       full | reduced
+ */
+
+:root {
+  /* ---- Type ---------------------------------------------------------- */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial,
+    system-ui, sans-serif;
+  --font-rounded: 'SF Pro Rounded', var(--font-sans);
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  /* ---- Apple system colours (light) --------------------------------- */
+  --sys-blue: #007aff;
+  --sys-purple: #af52de;
+  --sys-pink: #ff2d55;
+  --sys-red: #ff3b30;
+  --sys-orange: #ff9500;
+  --sys-yellow: #ffcc00;
+  --sys-green: #34c759;
+  --sys-teal: #30b0c7;
+  --sys-indigo: #5856d6;
+  --sys-gray: #8e8e93;
+  --sys-gray-2: #aeaeb2;
+  --sys-gray-3: #c7c7cc;
+  --sys-gray-4: #d1d1d6;
+  --sys-gray-5: #e5e5ea;
+  --sys-gray-6: #f2f2f7;
+
+  --accent: var(--sys-blue);
+  --accent-rgb: 0 122 255;
+  --on-accent: #fff;
+
+  /* ---- Labels & separators ------------------------------------------ */
+  --label: rgba(0, 0, 0, 0.88);
+  --label-2: rgba(60, 60, 67, 0.62);
+  --label-3: rgba(60, 60, 67, 0.32);
+  --label-4: rgba(60, 60, 67, 0.18);
+  --separator: rgba(60, 60, 67, 0.16);
+  --separator-strong: rgba(60, 60, 67, 0.28);
+  --link: var(--accent);
+
+  /* ---- Surfaces ------------------------------------------------------ */
+  --bg-grouped: #f2f2f7;
+  --bg-elevated: #ffffff;
+  --bg-secondary: rgba(118, 118, 128, 0.12);
+  --bg-tertiary: rgba(118, 118, 128, 0.08);
+  --window-content: rgba(255, 255, 255, 0.86);
+  --window-content-solid: #f7f7f9;
+  --sidebar-fill: rgba(255, 255, 255, 0.36);
+  --toolbar-fill: rgba(255, 255, 255, 0.28);
+  --control-fill: rgba(255, 255, 255, 0.6);
+  --control-fill-hover: rgba(255, 255, 255, 0.8);
+  --control-stroke: rgba(0, 0, 0, 0.08);
+  --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.06), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
+
+  /* ---- Liquid Glass -------------------------------------------------- */
+  --glass-fill: rgba(255, 255, 255, 0.4);
+  --glass-fill-thin: rgba(255, 255, 255, 0.22);
+  --glass-fill-thick: rgba(255, 255, 255, 0.64);
+  --glass-tint: rgb(var(--accent-rgb) / 0.03);
+  --glass-blur: 26px;
+  --glass-saturate: 1.9;
+  --glass-brightness: 1.06;
+  --glass-rim-hi: rgba(255, 255, 255, 0.95);
+  --glass-rim-mid: rgba(255, 255, 255, 0.3);
+  --glass-rim-lo: rgba(255, 255, 255, 0.55);
+  --glass-sheen: rgba(255, 255, 255, 0.34);
+  --glass-caustic: rgba(255, 255, 255, 0.5);
+  --glass-inner:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -0.5px 0 rgba(255, 255, 255, 0.25),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 24px 60px -18px rgba(12, 24, 60, 0.42), 0 2px 8px rgba(12, 24, 60, 0.1);
+  --glass-shadow-soft: 0 10px 30px -10px rgba(12, 24, 60, 0.3), 0 1px 3px rgba(12, 24, 60, 0.08);
+  --glass-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 0 12px rgba(0, 0, 0, 0.12);
+
+  /* Icon labels on the wallpaper */
+  --on-wallpaper: #fff;
+  --on-wallpaper-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 0 14px rgba(0, 0, 0, 0.25);
+
+  /* ---- Radii --------------------------------------------------------- */
+  --r-window: 14px;
+  --r-panel: 22px;
+  --r-card: 14px;
+  --r-control: 8px;
+  --r-pill: 999px;
+
+  /* ---- Motion -------------------------------------------------------- */
+  --dur-fast: 150ms;
+  --dur: 260ms;
+  --dur-slow: 420ms;
+  --dur-spring: 560ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.2, 1);
+  /* iOS-flavoured spring baked into linear() (ζ ≈ 0.68). */
+  --spring: linear(
+    0,
+    0.009,
+    0.035 2.1%,
+    0.141 4.4%,
+    0.281 6.7%,
+    0.723 12.9%,
+    0.938 16.7%,
+    1.017,
+    1.077 20.4%,
+    1.121,
+    1.149 24.3%,
+    1.159,
+    1.163 27.8%,
+    1.154,
+    1.129 32.8%,
+    1.051 39.6%,
+    1.017 43.1%,
+    0.991,
+    0.977 51%,
+    0.974 53.8%,
+    0.975 57.1%,
+    0.997 69.8%,
+    1.003 76.9%,
+    1.004 83.8%,
+    1
+  );
+  /* Softer spring for sheets and windows (ζ ≈ 0.85). */
+  --spring-soft: linear(
+    0,
+    0.006,
+    0.025 2.8%,
+    0.101 5.6%,
+    0.539 14.2%,
+    0.83 20.4%,
+    0.924,
+    0.992 25.8%,
+    1.04 29.5%,
+    1.052,
+    1.055 34.6%,
+    1.048,
+    1.032 42%,
+    1.004 51%,
+    0.996 58.9%,
+    0.997 68.7%,
+    1.001 82.9%,
+    1
+  );
+}
+
+/* ---- Dark appearance -------------------------------------------------- */
+
+[data-appearance='dark'] {
+  --sys-blue: #0a84ff;
+  --sys-purple: #bf5af2;
+  --sys-pink: #ff375f;
+  --sys-red: #ff453a;
+  --sys-orange: #ff9f0a;
+  --sys-yellow: #ffd60a;
+  --sys-green: #30d158;
+  --sys-teal: #40c8e0;
+  --sys-indigo: #5e5ce6;
+  --sys-gray: #8e8e93;
+  --sys-gray-2: #636366;
+  --sys-gray-3: #48484a;
+  --sys-gray-4: #3a3a3c;
+  --sys-gray-5: #2c2c2e;
+  --sys-gray-6: #1c1c1e;
+
+  --label: rgba(255, 255, 255, 0.92);
+  --label-2: rgba(235, 235, 245, 0.62);
+  --label-3: rgba(235, 235, 245, 0.32);
+  --label-4: rgba(235, 235, 245, 0.18);
+  --separator: rgba(84, 84, 88, 0.6);
+  --separator-strong: rgba(84, 84, 88, 0.9);
+
+  --bg-grouped: #000000;
+  --bg-elevated: #1c1c1e;
+  --bg-secondary: rgba(118, 118, 128, 0.24);
+  --bg-tertiary: rgba(118, 118, 128, 0.18);
+  --window-content: rgba(30, 31, 38, 0.82);
+  --window-content-solid: #202126;
+  --sidebar-fill: rgba(40, 42, 54, 0.32);
+  --toolbar-fill: rgba(40, 42, 54, 0.24);
+  --control-fill: rgba(255, 255, 255, 0.1);
+  --control-fill-hover: rgba(255, 255, 255, 0.16);
+  --control-stroke: rgba(255, 255, 255, 0.1);
+  --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+
+  --glass-fill: rgba(28, 30, 42, 0.44);
+  --glass-fill-thin: rgba(28, 30, 42, 0.26);
+  --glass-fill-thick: rgba(28, 30, 42, 0.68);
+  --glass-tint: rgb(var(--accent-rgb) / 0.05);
+  --glass-saturate: 1.7;
+  --glass-brightness: 0.98;
+  --glass-rim-hi: rgba(255, 255, 255, 0.55);
+  --glass-rim-mid: rgba(255, 255, 255, 0.1);
+  --glass-rim-lo: rgba(255, 255, 255, 0.24);
+  --glass-sheen: rgba(255, 255, 255, 0.14);
+  --glass-caustic: rgba(255, 255, 255, 0.22);
+  --glass-inner:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -0.5px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 28px 70px -20px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.35);
+  --glass-shadow-soft: 0 12px 34px -12px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ---- Accent ----------------------------------------------------------- */
+
+[data-accent='blue'] {
+  --accent: var(--sys-blue);
+  --accent-rgb: 0 122 255;
+}
+[data-accent='purple'] {
+  --accent: var(--sys-purple);
+  --accent-rgb: 175 82 222;
+}
+[data-accent='pink'] {
+  --accent: var(--sys-pink);
+  --accent-rgb: 255 45 85;
+}
+[data-accent='red'] {
+  --accent: var(--sys-red);
+  --accent-rgb: 255 59 48;
+}
+[data-accent='orange'] {
+  --accent: var(--sys-orange);
+  --accent-rgb: 255 149 0;
+}
+[data-accent='yellow'] {
+  --accent: var(--sys-yellow);
+  --accent-rgb: 255 204 0;
+  --on-accent: #1c1c1e;
+}
+[data-accent='green'] {
+  --accent: var(--sys-green);
+  --accent-rgb: 52 199 89;
+}
+[data-accent='graphite'] {
+  --accent: var(--sys-gray);
+  --accent-rgb: 142 142 147;
+}
+
+/* ---- Reduced transparency ---------------------------------------------- */
+
+[data-transparency='reduced'] {
+  --glass-fill: rgba(246, 247, 250, 0.97);
+  --glass-fill-thin: rgba(246, 247, 250, 0.94);
+  --glass-fill-thick: rgba(246, 247, 250, 0.99);
+  --glass-blur: 0px;
+  --glass-saturate: 1;
+  --glass-brightness: 1;
+  --glass-sheen: rgba(255, 255, 255, 0.2);
+  --glass-caustic: rgba(255, 255, 255, 0);
+  --window-content: #fbfbfd;
+  --sidebar-fill: #eef0f4;
+  --toolbar-fill: #f3f4f7;
+}
+
+[data-transparency='reduced'][data-appearance='dark'] {
+  --glass-fill: rgba(36, 37, 46, 0.97);
+  --glass-fill-thin: rgba(36, 37, 46, 0.94);
+  --glass-fill-thick: rgba(36, 37, 46, 0.99);
+  --glass-sheen: rgba(255, 255, 255, 0.06);
+  --window-content: #202128;
+  --sidebar-fill: #262833;
+  --toolbar-fill: #2a2c38;
+}
+
+/* ---- Reduced motion ---------------------------------------------------- */
+
+[data-motion='reduced'] {
+  --dur-fast: 1ms;
+  --dur: 1ms;
+  --dur-slow: 1ms;
+  --dur-spring: 1ms;
+  --spring: ease-out;
+  --spring-soft: ease-out;
+}
