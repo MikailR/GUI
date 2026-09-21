@@ -35,6 +35,8 @@ body {
 #root {
   position: relative;
   isolation: isolate;
+  /* Mobile Safari: track the visible viewport, not the layout viewport. */
+  height: 100dvh;
 }
 
 h1,

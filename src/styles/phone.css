@@ -451,6 +451,20 @@
   padding: 4px 16px 0;
 }
 
+/* ---- Search (Spotlight as an iOS sheet) ------------------------------- */
+
+.ios .spotlight-backdrop {
+  padding-top: 15vh;
+  background: rgba(10, 14, 40, 0.28);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  backdrop-filter: blur(22px) saturate(1.4);
+}
+[data-transparency='reduced'] .ios .spotlight-backdrop {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgba(10, 14, 40, 0.6);
+}
+
 /* ---- Lock screen ------------------------------------------------------ */
 
 .ios-lock {

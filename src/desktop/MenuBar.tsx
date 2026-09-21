@@ -39,7 +39,12 @@ export function MenuBar({ menus, controlCenterOpen, onToggleControlCenter, onSpo
     }
   }, [open, close, menus])
 
-  const date = now.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' })
+  // "Mon Sep 21" — macOS drops the comma the default locale format adds.
+  const date = [
+    now.toLocaleDateString(undefined, { weekday: 'short' }),
+    now.toLocaleDateString(undefined, { month: 'short' }),
+    now.toLocaleDateString(undefined, { day: 'numeric' }),
+  ].join(' ')
   const time = now.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })
 
   return (
