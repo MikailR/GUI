@@ -61,9 +61,10 @@ function placeWindow(state: OsState, appId: AppId, viewport: { w: number; h: num
   const w = Math.min(meta.size.w, viewport.w - 32)
   const h = Math.min(meta.size.h, viewport.h - MENU_BAR - DOCK_RESERVE)
   const openCount = state.windows.filter((win) => !win.minimized).length
-  const offset = (openCount % 6) * 28
-  const x = Math.max(16, Math.round((viewport.w - w) / 2 + offset - 40))
-  const y = Math.max(MENU_BAR + 12, Math.round((viewport.h - DOCK_RESERVE - h) / 2 + offset - 20))
+  // Cascade new windows down-right so stacked windows stay distinguishable.
+  const offset = (openCount % 5) * 40
+  const x = Math.max(16, Math.min(viewport.w - w - 16, Math.round((viewport.w - w) / 2 + offset - 80)))
+  const y = Math.max(MENU_BAR + 12, Math.min(viewport.h - DOCK_RESERVE - h, Math.round((viewport.h - DOCK_RESERVE - h) / 2 + offset - 40)))
   return { x, y, w, h }
 }
 

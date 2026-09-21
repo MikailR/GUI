@@ -54,6 +54,7 @@ export type SymbolName =
   | 'square.stack'
   | 'circle.lefthalf'
   | 'hand.tap'
+  | 'envelope'
   | 'os.mark'
 
 interface SymbolProps {
@@ -369,6 +370,13 @@ function glyph(name: SymbolName): ReactNode {
         <>
           <path d="M9 12V5.5a1.8 1.8 0 0 1 3.6 0V11" />
           <path d="M12.6 11v-1a1.8 1.8 0 0 1 3.6 0v2a1.8 1.8 0 0 1 3.6 0v3.5c0 3-2 5-5 5h-2.4c-1.5 0-2.6-.6-3.4-1.6L5.6 15a1.6 1.6 0 0 1 2.4-2l1 1.2" />
+        </>
+      )
+    case 'envelope':
+      return (
+        <>
+          <rect x="3" y="5.5" width="18" height="13" rx="2.5" />
+          <path d="M3.5 7l8.5 6 8.5-6" />
         </>
       )
     case 'os.mark':

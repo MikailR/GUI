@@ -1,17 +1,15 @@
-import { useId, type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 import type { AppId } from '../os/types'
-import { ICON_BOX, ICON_SQUIRCLE } from './squircle'
+import { IconShell, type IconVariant } from './IconShell'
+
+export type { IconVariant } from './IconShell'
 
 /**
- * App icons in Apple's icon language: a squircle silhouette filled edge-to-edge
- * with a rich two-stop gradient, a white filled glyph with a soft contact shadow,
- * a top-light sheen and a hairline specular edge. `variant="mac"` adds a touch
- * more depth (darker foot, stronger sheen) so icons sit on the Dock like objects.
- *
- * All glyphs are original drawings in an SF-Symbols-like weight; no Apple assets.
+ * App icons in Apple's icon language: a squircle filled edge-to-edge with a rich
+ * two-stop gradient, a white filled glyph with a soft contact shadow, a top-light
+ * sheen and a hairline specular edge (see IconShell). All glyphs are original
+ * drawings in an SF-Symbols-like weight; no Apple assets.
  */
-
-export type IconVariant = 'ios' | 'mac'
 
 interface AppIconProps {
   appId: AppId
@@ -45,69 +43,11 @@ export function appGlow(appId: AppId): string {
 }
 
 export function AppIcon({ appId, size = 64, variant = 'ios', full = false, className, style }: AppIconProps) {
-  const uid = useId().replace(/:/g, '')
-  const ids = {
-    clip: `clip-${uid}`,
-    bg: `bg-${uid}`,
-    sheen: `sheen-${uid}`,
-    rim: `rim-${uid}`,
-    foot: `foot-${uid}`,
-    shadow: `shadow-${uid}`,
-  }
   const palette = PALETTE[appId]
-
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${ICON_BOX} ${ICON_BOX}`}
-      className={className}
-      style={style}
-      aria-hidden="true"
-      focusable="false"
-      data-variant={variant}
-    >
-      <defs>
-        <clipPath id={ids.clip}>
-          <path d={ICON_SQUIRCLE} />
-        </clipPath>
-        <linearGradient id={ids.bg} x1="0.15" y1="0" x2="0.85" y2="1">
-          <stop offset="0" stopColor={palette.from} />
-          <stop offset="1" stopColor={palette.to} />
-        </linearGradient>
-        <linearGradient id={ids.sheen} x1="0" y1="0" x2="0.25" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity={variant === 'mac' ? 0.34 : 0.28} />
-          <stop offset="0.5" stopColor="#fff" stopOpacity="0.04" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id={ids.rim} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.7" />
-          <stop offset="0.5" stopColor="#fff" stopOpacity="0.18" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0.08" />
-        </linearGradient>
-        <radialGradient id={ids.foot} cx="0.5" cy="1.05" r="0.7">
-          <stop offset="0" stopColor="#000" stopOpacity={variant === 'mac' ? 0.22 : 0.12} />
-          <stop offset="1" stopColor="#000" stopOpacity="0" />
-        </radialGradient>
-        <filter id={ids.shadow} x="-20%" y="-20%" width="140%" height="150%">
-          <feDropShadow dx="0" dy="1.6" stdDeviation="1.4" floodColor="#000" floodOpacity="0.22" />
-        </filter>
-      </defs>
-
-      <g clipPath={`url(#${ids.clip})`}>
-        <rect width={ICON_BOX} height={ICON_BOX} fill={`url(#${ids.bg})`} />
-        <Artwork appId={appId} full={full} shadowId={ids.shadow} />
-        <rect width={ICON_BOX} height={ICON_BOX} fill={`url(#${ids.foot})`} />
-        <rect width={ICON_BOX} height={ICON_BOX} fill={`url(#${ids.sheen})`} />
-      </g>
-      <path
-        d={ICON_SQUIRCLE}
-        fill="none"
-        stroke={`url(#${ids.rim})`}
-        strokeWidth="1.6"
-        style={{ transform: 'scale(0.987)', transformOrigin: '60px 60px' }}
-      />
-    </svg>
+    <IconShell size={size} variant={variant} from={palette.from} to={palette.to} className={className} style={style}>
+      {(shadow) => <Artwork appId={appId} full={full} shadow={shadow} />}
+    </IconShell>
   )
 }
 
@@ -116,11 +56,10 @@ export function AppIcon({ appId, size = 64, variant = 'ios', full = false, class
 interface ArtworkProps {
   appId: AppId
   full: boolean
-  shadowId: string
+  shadow: string
 }
 
-function Artwork({ appId, full, shadowId }: ArtworkProps) {
-  const shadow = `url(#${shadowId})`
+function Artwork({ appId, full, shadow }: ArtworkProps) {
   switch (appId) {
     case 'about':
       return (
@@ -217,7 +156,7 @@ function Artwork({ appId, full, shadowId }: ArtworkProps) {
   }
 }
 
-/** A gear outline with rounded-ish teeth as a single closed path. */
+/** A gear outline with flat-topped teeth as a single closed path. */
 function gearPath(cx: number, cy: number, outer: number, inner: number, teeth: number): string {
   const step = (Math.PI * 2) / teeth
   const parts: string[] = []

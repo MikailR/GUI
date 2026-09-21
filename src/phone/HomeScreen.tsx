@@ -1,10 +1,12 @@
 import type { MouseEvent } from 'react'
 import { ABOUT, POSTS } from '../content/data'
 import { AppIcon } from '../icons/AppIcon'
+import { GlyphIcon } from '../icons/GlyphIcon'
 import { Symbol } from '../icons/Symbol'
 import { APPS } from '../os/apps'
 import { useClock } from '../os/hooks'
 import type { AppId } from '../os/types'
+import { HOME_SHORTCUTS, type HomeShortcut } from './shortcuts'
 
 interface HomeScreenProps {
   trashCount: number
@@ -26,6 +28,21 @@ export function HomeScreen({ trashCount, onOpen, onSearch, receded }: HomeScreen
   const open = (appId: AppId, route?: string) => (event: MouseEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect()
     onOpen(appId, route, { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 })
+  }
+
+  const runShortcut = (shortcut: HomeShortcut) => (event: MouseEvent<HTMLElement>) => {
+    switch (shortcut.action.kind) {
+      case 'link':
+        window.open(shortcut.action.href, '_blank', 'noopener')
+        break
+      case 'app':
+        open(shortcut.action.appId, shortcut.action.route)(event)
+        break
+      default: {
+        const exhaustive: never = shortcut.action
+        return exhaustive
+      }
+    }
   }
 
   return (
@@ -60,6 +77,14 @@ export function HomeScreen({ trashCount, onOpen, onSearch, receded }: HomeScreen
                 {app.id === 'trash' && trashCount > 0 ? <span className="ios-badge">{trashCount}</span> : null}
               </span>
               <span className="ios-app-label">{app.name}</span>
+            </button>
+          ))}
+          {HOME_SHORTCUTS.map((shortcut) => (
+            <button key={shortcut.id} type="button" className="ios-app-icon" onClick={runShortcut(shortcut)} aria-label={shortcut.name}>
+              <span className="ios-app-icon-art">
+                <GlyphIcon symbol={shortcut.symbol} from={shortcut.from} to={shortcut.to} size={60} />
+              </span>
+              <span className="ios-app-label">{shortcut.name}</span>
             </button>
           ))}
         </section>

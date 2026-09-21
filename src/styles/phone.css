@@ -102,6 +102,10 @@
 }
 .ios-widget {
   --radius: 24px;
+  /* Clear, slightly smoked glass so white vibrant text stays legible on light wallpapers. */
+  --glass-fill: rgba(30, 38, 70, 0.26);
+  --glass-tint: rgba(0, 0, 0, 0);
+  --glass-sheen: rgba(255, 255, 255, 0.22);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -463,8 +467,7 @@
   touch-action: none;
 }
 .ios[data-locked] .ios-home {
-  filter: blur(20px);
-  transform: scale(1.04);
+  visibility: hidden;
 }
 .ios-lock-top {
   display: flex;

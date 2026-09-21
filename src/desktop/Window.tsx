@@ -190,6 +190,9 @@ export const Window = memo(function Window({
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
+      onAnimationEnd={(event) => {
+        if (event.animationName === 'window-in') event.currentTarget.setAttribute('data-entered', '')
+      }}
     >
       <div className="mac-traffic" data-no-drag>
         <button type="button" className="mac-light" data-kind="close" onClick={requestClose} aria-label="Close window">

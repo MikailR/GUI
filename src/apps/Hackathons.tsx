@@ -60,6 +60,7 @@ export default function Hackathons({ shell, route, onRoute }: AppProps) {
       onBack={() => onRoute('')}
       sidebar={list}
       sidebarWidth={250}
+      plainHeader={nested}
     >
       {selected ? <HackathonDetail hack={selected} /> : null}
     </AppFrame>

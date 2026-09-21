@@ -40,13 +40,38 @@ export default function Settings({ shell, route, onRoute }: AppProps) {
       {shell === 'ios' ? (
         <Group>
           <div className="settings-me">
-            <span className="settings-me-avatar squircle">M</span>
+            <span className="settings-me-avatar">M</span>
             <span className="settings-me-text">
               <strong>Mikail</strong>
               <small>Mikail OS · Liquid Glass v2</small>
             </span>
             <Symbol name="chevron.right" size={13} weight={2.6} className="ui-row-chevron" />
           </div>
+        </Group>
+      ) : null}
+      {shell === 'ios' ? (
+        <Group>
+          <Row icon="moon" iconColor="#5856d6" label="Dark Appearance">
+            <Switch
+              checked={state.settings.appearance === 'dark'}
+              onChange={(dark) => dispatch({ type: 'settings', patch: { appearance: dark ? 'dark' : 'light' } })}
+              label="Dark appearance"
+            />
+          </Row>
+          <Row icon="square.stack" iconColor="#30b0c7" label="Liquid Glass">
+            <Switch
+              checked={!state.settings.reduceTransparency}
+              onChange={(glass) => dispatch({ type: 'settings', patch: { reduceTransparency: !glass } })}
+              label="Liquid Glass"
+            />
+          </Row>
+          <Row icon="sparkles" iconColor="#ff9500" label="Live Wallpaper">
+            <Switch
+              checked={state.settings.liveWallpaper}
+              onChange={(liveWallpaper) => dispatch({ type: 'settings', patch: { liveWallpaper } })}
+              label="Live wallpaper"
+            />
+          </Row>
         </Group>
       ) : null}
       <Group>

@@ -258,9 +258,12 @@
   transform-origin: center;
   will-change: transform;
 }
+/* Once the enter animation has played, drop it so drag transforms never fight it. */
+.mac-window[data-entered] {
+  animation: none;
+}
 .mac-window[data-dragging],
 .mac-window[data-resizing] {
-  animation: none;
   cursor: default;
 }
 .mac-window:not([data-focused]) {

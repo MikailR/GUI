@@ -383,11 +383,14 @@
   gap: 2px;
 }
 .ui-row-label {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .ui-row-detail {
+  min-width: 0;
+  flex-shrink: 1;
   color: var(--label-2);
   font-size: 0.93em;
   overflow: hidden;
