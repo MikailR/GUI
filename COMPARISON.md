@@ -1,6 +1,6 @@
 # Comparison — bakeoff + Windows and Liquid Glass iterations
 
-Same brief. Five frozen benchmarks, plus two nostalgia iterations and one Apple Liquid Glass iteration. Short takes after build + skim of each direction.
+Same brief. Five frozen benchmarks, plus two nostalgia iterations and two Apple Liquid Glass iterations. Short takes after build + skim of each direction.
 
 ## grok-4.6 (Grok CLI · grok-4.6)
 **Helios OS** — dusk-indigo desktop with an ember sun, glass windows, Fraunces + Outfit type, macOS dock/menu bar, Spotlight, boot splash, and a dedicated mobile home. Feels cohesive and “productized”; the strongest single-metaphor commitment of the set. Slightly safer/editorial than wild.
@@ -26,6 +26,9 @@ Warm-nocturnal desk guided by Claude Design MCP: mockup-first (desktop + phone f
 ## liquid-glass (Cursor Cloud Agent · claude-fable-5-1 · iteration)
 **Mikail OS — Liquid Glass** — commits to Apple's current material on both form factors: a transparent Tahoe-style menu bar with working menus and a Control Center, a floating glass Dock with Gaussian magnification, frosted windows with a masked specular rim and a calmer content surface, Spotlight, and four generative canvas wallpapers. Below 820px it stops pretending to be a desktop and becomes iOS: glass widgets, a squircle home grid, full-screen apps with collapsing large titles and floating **‹ Home / ‹ Back / ×** pills, hash-mirrored history. The Lab is eight material and motion toys (glass workbench with edge refraction, liquid lens, spring → `linear()` baker). Most disciplined material system of the set; the wallpaper ribbons are the one place it flirts with generic.
 
+## liquid-glass-v2 (Cursor Cloud Agent · claude-fable-5-1 · iteration)
+**Mikail OS — Liquid Glass v2** — a from-scratch rebuild after v1 read "too Android". Every icon is now a true superellipse squircle with a filled SF-style glyph, contact shadow, sheen and hairline rim (Notes-style Writing, Files-style Papers, gear Settings, wire-basket Trash), and the glass is five layers (tinted fill, blur/saturate, sheen + pointer caustic, masked specular rim, colour-aware shadow) rather than one blur. Desktop is macOS proper: bold-app-name menu bar with submenus, glass sidebar over a calm content pane, Dock with Gaussian magnification, Control Center, Spotlight. Below 820px it is unmistakably iOS: a swipe-up Lock Screen, Dynamic Island, smoked-glass widgets, squircle grid + Search pill + translucent Dock, apps that spring-zoom from their icon into `‹ Back` nav bars with collapsing large titles, inset grouped lists and action sheets. Seven Apple-flavoured Lab toys (Squircle Studio, Icon Forge, Dynamic Island, Dock Physics…). The strongest two-second "that's Apple" read of the set; the once-per-session Lock Screen is the one deliberate friction point.
+
 ## Pick guide
 - Want **classic FE-engineer wow + toys** → `fable-5.1` or `opus-5`
 - Want **tight product metaphor** → `grok-4.6`
@@ -35,3 +38,4 @@ Warm-nocturnal desk guided by Claude Design MCP: mockup-first (desktop + phone f
 
 - Want **classic Windows 98 + a tactile mobile home** → `win98-classic`
 - Want **Apple Liquid Glass + a real iOS phone shell** → `liquid-glass`
+- Want the **most authentic macOS/iOS read (squircle icons, layered glass, Lock Screen)** → `liquid-glass-v2`

@@ -13,6 +13,7 @@
 | win98-xp | https://mikailr.github.io/GUI/previews/win98-xp/ |
 | win98-classic | https://mikailr.github.io/GUI/previews/win98-classic/ |
 | liquid-glass | https://mikailr.github.io/GUI/previews/liquid-glass/ |
+| liquid-glass-v2 | https://mikailr.github.io/GUI/previews/liquid-glass-v2/ |
 
 ## Cloudflare quick tunnel (box, ephemeral)
 
