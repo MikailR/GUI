@@ -1,0 +1,799 @@
+/* =====================================================================
+   Lab
+   ===================================================================== */
+
+.lab-list {
+  display: flex;
+  flex-direction: column;
+}
+.lab-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.lab-grid[data-shell='ios'] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.lab-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 8px;
+  border-radius: 9px;
+  text-align: left;
+  color: var(--label);
+  cursor: default;
+}
+.lab-grid[data-shell='ios'] .lab-tile {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 0.5px var(--separator);
+  gap: 14px;
+  min-height: 74px;
+}
+.lab-grid[data-shell='ios'] .lab-tile:active {
+  background: var(--bg-tertiary);
+}
+.lab-grid[data-shell='mac'] .lab-tile:hover {
+  background: var(--bg-tertiary);
+}
+.lab-grid[data-shell='mac'] .lab-tile[aria-current='true'] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.lab-grid[data-shell='mac'] .lab-tile[aria-current='true'] .lab-tile-tagline {
+  color: inherit;
+  opacity: 0.85;
+}
+.lab-tile-icon {
+  --radius: 28%;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(160deg, hsl(var(--hue) 90% 70%), hsl(var(--hue) 78% 48%));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 3px 6px hsl(var(--hue) 70% 40% / 0.35);
+}
+.lab-grid[data-shell='ios'] .lab-tile-icon {
+  width: 46px;
+  height: 46px;
+}
+.lab-tile-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.lab-tile-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+.lab-grid[data-shell='ios'] .lab-tile-name {
+  font-size: 16px;
+}
+.lab-tile-tagline {
+  font-size: 11.5px;
+  color: var(--label-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lab-grid[data-shell='ios'] .lab-tile-tagline {
+  font-size: 13px;
+  white-space: normal;
+}
+
+.lab-intro {
+  height: 100%;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  padding: 40px;
+  color: var(--label-2);
+}
+.lab-intro-mark {
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.lab-intro h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--label);
+}
+.lab-intro p {
+  max-width: 380px;
+  line-height: 1.5;
+}
+.lab-intro .ui-button {
+  margin-top: 10px;
+}
+
+.lab-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 24px 32px;
+  max-width: 900px;
+}
+[data-shell='ios'] .lab-stage {
+  padding: 4px 16px 24px;
+}
+.lab-stage-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lab-stage-head h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+[data-shell='ios'] .lab-stage-head h1 {
+  font-size: 30px;
+}
+.lab-stage-head p {
+  color: var(--label-2);
+  line-height: 1.5;
+  max-width: 620px;
+  font-size: 14px;
+}
+.lab-stage-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lab-experiment {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.lab-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px 20px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 0.5px var(--separator);
+}
+[data-shell='mac'] .lab-controls {
+  background: var(--control-fill);
+}
+.lab-param {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.lab-param-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--label-2);
+}
+.lab-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.lab-preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.lab-note {
+  font-size: 13px;
+  color: var(--label-2);
+  line-height: 1.5;
+}
+.lab-note code {
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--bg-secondary);
+}
+.lab-output {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lab-output-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--label-2);
+}
+.lab-code {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #1c1c1e;
+  color: #e6e6eb;
+  font-size: 12px;
+  line-height: 1.55;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* ---- Glass Bench ------------------------------------------------------ */
+
+.glass-bench-stage {
+  position: relative;
+  height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  touch-action: none;
+}
+.glass-bench-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 80% at 15% 20%, #ff6a3d, transparent 60%),
+    radial-gradient(60% 80% at 85% 25%, #3d7dff, transparent 60%),
+    radial-gradient(70% 70% at 60% 90%, #34c759, transparent 60%),
+    radial-gradient(50% 60% at 25% 85%, #ffd60a, transparent 60%),
+    #1c1c3a;
+}
+.glass-bench-stripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.18) 0 6px, transparent 6px 26px);
+}
+.glass-bench-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.45) 1.2px, transparent 1.4px);
+  background-size: 14px 14px;
+}
+.glass-bench-text {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  line-height: 1.4;
+}
+.glass-bench-pane {
+  position: absolute;
+  left: calc(50% - 120px);
+  top: calc(50% - 80px);
+  width: 240px;
+  height: 160px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, var(--fill));
+  -webkit-backdrop-filter: blur(var(--b)) saturate(var(--sat));
+  backdrop-filter: blur(var(--b)) saturate(var(--sat));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, calc(var(--rim) * 0.7)),
+    0 24px 60px -18px rgba(12, 24, 60, 0.5);
+  cursor: grab;
+  isolation: isolate;
+  touch-action: none;
+}
+.glass-bench-pane:active {
+  cursor: grabbing;
+}
+.glass-bench-pane::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, var(--rim)),
+    rgba(255, 255, 255, 0.25) 30%,
+    rgba(255, 255, 255, 0.25) 65%,
+    rgba(255, 255, 255, calc(var(--rim) * 0.6))
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.glass-bench-pane-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--edge);
+  -webkit-backdrop-filter: blur(2px) brightness(1.18) saturate(1.3);
+  backdrop-filter: blur(2px) brightness(1.18) saturate(1.3);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.glass-bench-pane-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.glass-bench-pane-content strong {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.glass-bench-pane-content small {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* ---- Squircle Studio -------------------------------------------------- */
+
+.squircle-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 20px;
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 0.5px var(--separator);
+}
+[data-shell='mac'] .squircle-stage {
+  background: var(--control-fill);
+}
+.squircle-legend {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+  color: var(--label-2);
+}
+.squircle-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.squircle-key {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+/* ---- Icon Forge ------------------------------------------------------- */
+
+.icon-forge-stage {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 28px;
+  padding: 26px 20px 18px;
+  border-radius: 20px;
+  background:
+    radial-gradient(80% 100% at 20% 0%, rgba(255, 255, 255, 0.5), transparent 60%),
+    linear-gradient(160deg, #dbe7ff, #c3cfee);
+  box-shadow: 0 0 0 0.5px var(--separator);
+  flex-wrap: wrap;
+}
+[data-appearance='dark'] .icon-forge-stage {
+  background:
+    radial-gradient(80% 100% at 20% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
+    linear-gradient(160deg, #262a3a, #14161f);
+}
+.icon-forge-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--label-2);
+}
+.icon-forge-preview svg {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+.icon-forge-dark {
+  padding: 14px 18px 10px;
+  border-radius: 16px;
+  background: #0b0d14;
+  color: rgba(255, 255, 255, 0.6);
+}
+.icon-forge-glyphs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.icon-forge-glyph {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 0.5px var(--separator);
+  color: var(--label);
+  cursor: default;
+}
+.icon-forge-glyph[aria-checked='true'] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.icon-forge-glyphs .ui-button {
+  margin-left: auto;
+}
+
+/* ---- Dock Physics ----------------------------------------------------- */
+
+.dock-physics-stage {
+  display: flex;
+  justify-content: center;
+  padding: 40px 10px 16px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #6ea6ff, #7a5cff 60%, #ff7ac8);
+  overflow: hidden;
+}
+.dock-physics-row {
+  --radius: 22px;
+  display: flex;
+  align-items: flex-end;
+  height: 66px;
+  padding: 0 10px 6px;
+  gap: 6px;
+  touch-action: none;
+}
+.dock-physics-item {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 44px;
+  transition: width 60ms linear;
+}
+.dock-physics-item svg {
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+.dock-physics-plot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 0.5px var(--separator);
+  color: var(--label-2);
+}
+[data-shell='mac'] .dock-physics-plot {
+  background: var(--control-fill);
+}
+.dock-physics-plot svg {
+  width: 100%;
+  height: 90px;
+}
+
+/* ---- Spring Lab ------------------------------------------------------- */
+
+.spring-stage {
+  position: relative;
+  height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 90% at 20% 20%, #ff7ac8, transparent 60%),
+    radial-gradient(70% 90% at 80% 80%, #5b3cf5, transparent 60%),
+    #2a1d5c;
+  touch-action: none;
+  cursor: grab;
+}
+.spring-stage:active {
+  cursor: grabbing;
+}
+.spring-readout {
+  --radius: 999px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  gap: 14px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #fff;
+  pointer-events: none;
+}
+.spring-readout strong {
+  font-weight: 700;
+}
+.lab-presets {
+  grid-column: 1 / -1;
+}
+
+/* ---- Dynamic Island --------------------------------------------------- */
+
+.island-stage {
+  display: flex;
+  justify-content: center;
+  padding: 24px 10px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #ffb36a, #ff6f9a 55%, #7a8cff);
+}
+.island-phone {
+  position: relative;
+  width: 280px;
+  height: 340px;
+  border-radius: 40px;
+  background: rgba(0, 0, 0, 0.12);
+  box-shadow:
+    inset 0 0 0 6px #111,
+    0 20px 40px -20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+.island {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 36px;
+  width: 124px;
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: default;
+  transition:
+    width var(--dur-spring) var(--spring),
+    height var(--dur-spring) var(--spring),
+    border-radius var(--dur-spring) var(--spring);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.island[data-state='timer'] {
+  width: 180px;
+}
+.island[data-state='music'] {
+  width: 256px;
+  height: 76px;
+  border-radius: 38px;
+  padding: 0 16px;
+}
+.island[data-state='call'] {
+  width: 256px;
+  height: 76px;
+  border-radius: 38px;
+  padding: 0 16px;
+}
+.island-sensor {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #1d2a44, #000 70%);
+  opacity: 0.9;
+}
+.island:not([data-state='compact']) .island-sensor {
+  opacity: 0;
+}
+.island-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  animation: island-fade var(--dur) var(--ease-out);
+}
+@keyframes island-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+.island-ring {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--sys-orange);
+  color: #000;
+}
+.island-timer {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sys-orange);
+  margin-left: auto;
+}
+.island-art {
+  --radius: 30%;
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(160deg, #ff7ac8, #5b3cf5);
+  flex: none;
+}
+.island-music {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+  flex: 1;
+}
+.island-music strong {
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.island-music small {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.island-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 22px;
+}
+.island-bars i {
+  width: 4px;
+  border-radius: 2px;
+  background: #ff7ac8;
+  animation: island-bar 0.9s ease-in-out infinite;
+}
+.island-bars i:nth-child(1) {
+  height: 40%;
+  animation-delay: 0s;
+}
+.island-bars i:nth-child(2) {
+  height: 90%;
+  animation-delay: 0.15s;
+}
+.island-bars i:nth-child(3) {
+  height: 60%;
+  animation-delay: 0.3s;
+}
+.island-bars i:nth-child(4) {
+  height: 75%;
+  animation-delay: 0.45s;
+}
+@keyframes island-bar {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+[data-motion='reduced'] .island-bars i {
+  animation: none;
+}
+.island-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, #7cc6ff, #1d5cff);
+  font-weight: 700;
+  font-size: 18px;
+  flex: none;
+}
+.island-call {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.island-decline {
+  background: var(--sys-red);
+}
+.island-accept {
+  background: var(--sys-green);
+}
+.island-home {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.island-widget {
+  --radius: 20px;
+  padding: 14px 16px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  text-shadow: var(--on-wallpaper-shadow);
+}
+.island-widget strong {
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+.island-widget small {
+  font-size: 12px;
+  font-weight: 600;
+}
+.island-icons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+.island-icon {
+  --radius: 26%;
+  width: 46px;
+  height: 46px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* ---- Ripples ---------------------------------------------------------- */
+
+.ripples-stage {
+  position: relative;
+  height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 90% at 20% 10%, #7fd7ff, transparent 60%),
+    radial-gradient(70% 90% at 90% 90%, #124a4a, transparent 60%),
+    #2e8b7a;
+  touch-action: none;
+  cursor: crosshair;
+}
+.ripples-label {
+  --radius: 999px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  pointer-events: none;
+}
+
+/* ---- Compact overrides ------------------------------------------------ */
+
+.lab-experiment[data-compact] .glass-bench-stage,
+.lab-experiment[data-compact] .spring-stage,
+.lab-experiment[data-compact] .ripples-stage {
+  height: 260px;
+}
+.lab-experiment[data-compact] .lab-controls {
+  grid-template-columns: 1fr;
+}

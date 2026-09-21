@@ -1,0 +1,1 @@
+import{r as e}from"./Symbol-e5VgZIPJ.js";var t=e();function n(e){let[n,r]=(0,t.useState)({width:0,height:0});return(0,t.useEffect)(()=>{let t=e.current;if(!t)return;let n=new ResizeObserver(e=>{let t=e[0];if(!t)return;let{width:n,height:i}=t.contentRect;r(e=>e.width===n&&e.height===i?e:{width:n,height:i})});return n.observe(t),()=>n.disconnect()},[e]),n}export{n as t};

@@ -1,0 +1,157 @@
+/*
+ * Liquid Glass.
+ *
+ * A pane is composed of five layers, bottom to top:
+ *   1. fill        translucent tint (light: white 40%, dark: navy 44%), plus an accent tint
+ *   2. backdrop    blur + saturate + brightness — vibrancy: the wallpaper colours survive
+ *   3. lens        ::after — top sheen + a caustic highlight that follows the pointer (--mx/--my)
+ *   4. rim         ::before — 1px masked gradient ring; bright where light enters (top-left) and
+ *                  exits (bottom-right), dim in between. --rim-angle tunes the light direction.
+ *   5. shadow      long, low-opacity, colour-aware
+ *
+ * Variants: .glass-thin (menu bar, pills), .glass-thick (windows, sheets), .glass-tint (accent).
+ * data-transparency="reduced" collapses everything to a solid surface with a hairline border.
+ */
+
+.glass {
+  position: relative;
+  border-radius: var(--radius, var(--r-panel));
+  background:
+    linear-gradient(var(--glass-tint), var(--glass-tint)),
+    var(--glass-fill);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  box-shadow: var(--glass-inner), var(--glass-shadow);
+  isolation: isolate;
+}
+
+.glass-thin {
+  --glass-fill: var(--glass-fill-thin);
+  box-shadow: var(--glass-inner), var(--glass-shadow-soft);
+}
+
+.glass-thick {
+  --glass-fill: var(--glass-fill-thick);
+}
+
+.glass-soft {
+  box-shadow: var(--glass-inner), var(--glass-shadow-soft);
+}
+
+.glass-flat {
+  box-shadow: var(--glass-inner);
+}
+
+/* Specular rim */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    var(--rim-angle, 135deg),
+    var(--glass-rim-hi) 0%,
+    var(--glass-rim-mid) 28%,
+    var(--glass-rim-mid) 62%,
+    var(--glass-rim-lo) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Lens: sheen + caustic */
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      70% 60% at var(--mx, 25%) var(--my, -10%),
+      var(--glass-caustic) 0%,
+      rgba(255, 255, 255, 0) 60%
+    ),
+    linear-gradient(180deg, var(--glass-sheen) 0%, rgba(255, 255, 255, 0.02) 38%, rgba(255, 255, 255, 0) 100%);
+  opacity: var(--sheen-opacity, 1);
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Surfaces that track the pointer get a moving caustic (see useCaustic). */
+.glass-caustic::after {
+  background:
+    radial-gradient(
+      42% 48% at var(--mx, 50%) var(--my, 50%),
+      var(--glass-caustic) 0%,
+      rgba(255, 255, 255, 0) 70%
+    ),
+    linear-gradient(180deg, var(--glass-sheen) 0%, rgba(255, 255, 255, 0.02) 38%, rgba(255, 255, 255, 0) 100%);
+  opacity: var(--caustic-on, 0.55);
+}
+.glass-caustic:hover::after {
+  --caustic-on: 1;
+}
+
+/* Interactive glass elements (pills, buttons on wallpaper) */
+.glass-button {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+.glass-button:hover {
+  --glass-fill: var(--glass-fill-thick);
+}
+.glass-button:active {
+  transform: scale(0.96);
+}
+
+/* Text sitting directly on glass over wallpaper */
+.vibrant {
+  color: var(--label);
+  text-shadow: none;
+}
+.on-wallpaper {
+  color: var(--on-wallpaper);
+  text-shadow: var(--on-wallpaper-shadow);
+}
+
+/* Reduced transparency: solid surfaces, hairline border instead of a rim. */
+[data-transparency='reduced'] .glass {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow:
+    0 0 0 1px var(--separator),
+    var(--glass-shadow-soft);
+}
+[data-transparency='reduced'] .glass::before {
+  opacity: 0.35;
+}
+[data-transparency='reduced'] .glass::after {
+  opacity: 0.3;
+}
+
+/* Squircle corners where the browser can draw them (Chrome 139+); fallback is a large radius. */
+.squircle {
+  border-radius: var(--radius, 22%);
+}
+@supports (corner-shape: squircle) {
+  .squircle {
+    corner-shape: superellipse(1.6);
+    border-radius: var(--radius-squircle, 34%);
+  }
+}
