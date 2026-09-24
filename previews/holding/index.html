@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Mikail — Waterloo alum. Building a personal OS. Desktop &amp; simple modes coming." />
+  <meta property="og:title" content="Mikail" />
+  <meta property="og:description" content="Waterloo CS / math / physics alum. Ships hackathons &amp; prototypes. Site rebuild in progress." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <title>Mikail</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="stage" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="grain"></div>
+  </div>
+
+  <main class="shell">
+    <article class="card" role="region" aria-label="Site holding page">
+      <div class="card-sheen" aria-hidden="true"></div>
+
+      <header class="identity">
+        <div class="avatar-wrap" aria-hidden="true">
+          <img class="avatar" src="./assets/avatar.jpg" alt="" width="88" height="88" decoding="async" />
+          <span class="avatar-rim"></span>
+        </div>
+        <div class="identity-text">
+          <p class="wip"><span class="wip-dot" aria-hidden="true"></span> Rebuild in progress</p>
+          <h1 class="name">Mikail</h1>
+          <p class="builder">
+            Waterloo CS / math / physics alum.
+            Ships hackathons &amp; prototypes — usually things I’m not qualified to build yet.
+          </p>
+        </div>
+      </header>
+
+      <p class="teaser">
+        <span class="teaser-kicker">Next</span>
+        Desktop &amp; simple modes coming — a multiplexer with swappable shells.
+      </p>
+
+      <nav class="ctas" aria-label="Links">
+        <a class="cta" href="https://github.com/MikailR" rel="noopener noreferrer">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.62 7.62 0 0 1 8 3.5c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          </span>
+          GitHub
+        </a>
+        <a class="cta" href="mailto:hello@mikail.xyz">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="3" width="13" height="10" rx="2"/><path d="m2.5 4.5 5.5 4 5.5-4"/></svg>
+          </span>
+          Email
+        </a>
+        <a class="cta" href="https://x.com/mikail_xyz" rel="noopener noreferrer">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor"><path d="M12.6 1.5h2.2L9.7 7.1 15.5 14.5h-4.5L7.6 9.9 3.6 14.5H1.4l5.4-5.9L1 1.5h4.6l3.2 4.2 3.8-4.2Zm-.8 11.7h1.2L4.3 2.7H3L11.8 13.2Z"/></svg>
+          </span>
+          X
+        </a>
+        <a class="cta cta-lab" href="https://mikailr.github.io/GUI/" rel="noopener noreferrer">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2.5" width="12" height="9" rx="1.5"/><path d="M5 14.5h6M8 11.5v3"/></svg>
+          </span>
+          Lab
+        </a>
+      </nav>
+
+      <footer class="meta">
+        <span class="meta-stamp" id="stamp">Sep 2026</span>
+        <span class="meta-sep" aria-hidden="true">·</span>
+        <span class="meta-note">mikail.xyz holding page</span>
+      </footer>
+    </article>
+  </main>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>

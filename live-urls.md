@@ -30,3 +30,5 @@ Base: https://covered-pharmacies-rap-cas.trycloudflare.com
 | win98-xp | https://covered-pharmacies-rap-cas.trycloudflare.com/previews/win98-xp/ |
 
 Repo: https://github.com/MikailR/GUI
+
+- [holding page](https://mikailr.github.io/GUI/previews/holding/) — temporary mikail.xyz holding (matte / liquid-glass lite)
