@@ -31,4 +31,4 @@ Base: https://covered-pharmacies-rap-cas.trycloudflare.com
 
 Repo: https://github.com/MikailR/GUI
 
-- [holding page](https://mikailr.github.io/GUI/previews/holding/) — temporary mikail.xyz holding (matte / liquid-glass lite)
+- [holding page](https://mikailr.github.io/GUI/previews/holding/) — temporary mikail.xyz holding (simple under construction)

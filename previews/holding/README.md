@@ -1,10 +1,43 @@
 # mikail.xyz — temporary holding page
 
-Matte dark / liquid-glass-lite **holding page** for [mikail.xyz](https://mikail.xyz) while the full personal-OS desktop release is finished.
+Deliberately simple under-construction page while the full site is rebuilt.
 
-Taste reference: [liquid-glass-v2](https://mikailr.github.io/GUI/previews/liquid-glass-v2/) (blur panel, squircle mark). Content shaped from the GUI handoff `profile-stub.json`.
+## Public page
 
-This is **not** the OS window-manager site and **not** a Win98 prototype. One quiet screen: name, headline, short builder line, one redesign teaser, real links only.
+Visible content only:
+- Round profile image from `avatar.jpg` (falls back to a plain “M” circle if missing)
+- Name: **Mikail**
+- “Site under construction. Back soon.”
+- One link: [GitHub](https://github.com/MikailR)
+
+## Upload a profile image
+
+Unlisted admin (not linked from the public page):
+
+https://mikailr.github.io/GUI/previews/holding/admin/
+
+1. Create a **fine-grained** GitHub PAT with **Contents: Read and write** on `MikailR/GUI` (or the production repo once you switch).
+2. Paste the token → **Store token** (saved in `localStorage` only).
+3. Pick a photo → preview (center-cropped 512px JPEG) → **Upload & commit**.
+4. Wait ~1 minute for GitHub Pages to refresh, then hard-reload the public page.
+
+**Forget token** clears the PAT from this browser.
+
+### Repoint to production later
+
+In `admin/index.html`, edit the `CONFIG` object at the top of the script:
+
+```js
+var CONFIG = {
+  owner: "0xGershwin",
+  repo: "mikail.xyz",
+  branch: "main",
+  path: "assets/avatar.jpg",   // or wherever production expects it
+  // …
+};
+```
+
+The Target fields on the admin form are also editable at runtime.
 
 ## Open locally
 
@@ -12,31 +45,12 @@ This is **not** the OS window-manager site and **not** a Win98 prototype. One qu
 cd mikail-holding
 python3 -m http.server 8765
 # → http://localhost:8765
+# → http://localhost:8765/admin/
 ```
 
-Or open `index.html` directly (relative assets; works offline aside from the Inter webfont).
+## Demo
 
-## Contents
-
-| Path | Role |
-|---|---|
-| `index.html` | Markup |
-| `styles.css` | Matte stage + frosted card |
-| `app.js` | Tiny date stamp |
-| `assets/portrait-seed.svg` | Squircle avatar (handoff seed) |
-| `assets/favicon.svg` | Squircle mark |
-| `profile-stub.json` | ContentClient-shaped stub (email null; avatarMediaId kept) |
-
-## Demo / preview host
-
-https://mikailr.github.io/GUI/previews/holding/
+- Public: https://mikailr.github.io/GUI/previews/holding/
+- Admin: https://mikailr.github.io/GUI/previews/holding/admin/
 
 Does **not** touch mikail.xyz production.
-
-## Taste / content rules
-
-- Matte dark void, soft indigo/blue glows, frosted panel, squircle portrait
-- Headline from stub: *I build small systems and swap the skin later.*
-- One teaser only: desktop & simple modes / multiplexer + swappable shells
-- CTAs: GitHub, Lab (GUI board), live demos — no email (null in stub), no notify-me
-- No green accents, no particle wallpaper, no Win98 chrome

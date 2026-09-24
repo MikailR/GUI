@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#fafafa" />
+  <title>admin — Mikail holding</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fafafa;
+      --ink: #111;
+      --muted: #666;
+      --line: #e5e5e5;
+      --face: #ececec;
+      --ok: #1a7f37;
+      --err: #b42318;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { padding: 32px 20px 48px; }
+    main {
+      width: min(100%, 32rem);
+      margin: 0 auto;
+    }
+    .label {
+      margin: 0 0 0.5rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      margin: 0 0 1.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    section {
+      margin: 0 0 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+    }
+    h2 {
+      margin: 0 0 0.75rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .note {
+      margin: 0 0 0.85rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85em;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 0 0 0.65rem;
+    }
+    label.field {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0 0 0.65rem;
+      font-size: 0.75rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      text-transform: lowercase;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="file"] {
+      width: 100%;
+      padding: 0.55rem 0.65rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.95rem;
+    }
+    input[type="file"] { padding: 0.45rem; }
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 0.45rem 0.8rem;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button:hover { border-color: #bbb; }
+    button.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    button.primary:hover { opacity: 0.9; }
+    button:disabled { opacity: 0.5; cursor: default; }
+    .status {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      min-height: 1.2em;
+    }
+    .status.ok { color: var(--ok); }
+    .status.err { color: var(--err); }
+    .preview-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.75rem 0;
+    }
+    .preview {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--face);
+      border: 1px solid var(--line);
+      flex: 0 0 auto;
+    }
+    .preview img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .preview-empty {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    a { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="label">unlisted</p>
+    <h1>Upload profile image</h1>
+    <p class="lead">
+      Center-crops to a square, encodes as ~512px JPEG, and commits
+      <code>avatar.jpg</code> via the GitHub Contents API. Token stays in this
+      browser’s <code>localStorage</code> only.
+    </p>
+
+    <section aria-labelledby="access-title">
+      <h2 id="access-title">1. Access</h2>
+      <p class="note">
+        Fine-grained GitHub PAT with <strong>Contents: Read and write</strong>
+        on the target repo. Never committed to the repo; sent only to
+        <code>api.github.com</code>.
+      </p>
+      <label class="field" for="pat">token
+        <input id="pat" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" />
+      </label>
+      <div class="row">
+        <button type="button" id="store-token">Store token</button>
+        <button type="button" id="forget-token">Forget token</button>
+        <span class="status" id="token-status"></span>
+      </div>
+    </section>
+
+    <section aria-labelledby="target-title">
+      <h2 id="target-title">2. Target</h2>
+      <p class="note">Defaults match this Pages preview. Change the config object in the script (or these fields) when moving to production.</p>
+      <label class="field" for="owner">owner <input id="owner" type="text" spellcheck="false" /></label>
+      <label class="field" for="repo">repo <input id="repo" type="text" spellcheck="false" /></label>
+      <label class="field" for="branch">branch <input id="branch" type="text" spellcheck="false" /></label>
+      <label class="field" for="path">path <input id="path" type="text" spellcheck="false" /></label>
+    </section>
+
+    <section aria-labelledby="photo-title">
+      <h2 id="photo-title">3. Photo</h2>
+      <label class="field" for="file">image file
+        <input id="file" type="file" accept="image/*" />
+      </label>
+      <div class="preview-wrap">
+        <div class="preview" id="preview">
+          <div class="preview-empty" id="preview-empty">no image</div>
+          <img id="preview-img" alt="Preview" hidden />
+        </div>
+        <p class="note" style="margin:0">
+          Preview is the cropped JPEG that will be committed.
+          GitHub Pages can take about a minute to show the new image.
+        </p>
+      </div>
+      <div class="row">
+        <button type="button" class="primary" id="upload" disabled>Upload &amp; commit</button>
+        <span class="status" id="upload-status"></span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+(function () {
+  // One place to retarget later (e.g. 0xGershwin / mikail.xyz / main / assets/avatar.jpg)
+  var CONFIG = {
+    owner: "MikailR",
+    repo: "GUI",
+    branch: "main",
+    path: "previews/holding/avatar.jpg",
+    tokenKey: "mikail.holding.admin.pat",
+    avatarSize: 512,
+    jpegQuality: 0.85,
+  };
+
+  var pendingBlob = null;
+
+  var els = {
+    pat: document.getElementById("pat"),
+    store: document.getElementById("store-token"),
+    forget: document.getElementById("forget-token"),
+    tokenStatus: document.getElementById("token-status"),
+    owner: document.getElementById("owner"),
+    repo: document.getElementById("repo"),
+    branch: document.getElementById("branch"),
+    path: document.getElementById("path"),
+    file: document.getElementById("file"),
+    previewImg: document.getElementById("preview-img"),
+    previewEmpty: document.getElementById("preview-empty"),
+    upload: document.getElementById("upload"),
+    uploadStatus: document.getElementById("upload-status"),
+  };
+
+  function setStatus(node, kind, message) {
+    node.className = "status" + (kind ? " " + kind : "");
+    node.innerHTML = message || "";
+  }
+
+  function token() {
+    return window.localStorage.getItem(CONFIG.tokenKey) || "";
+  }
+
+  function paintTokenStatus() {
+    var t = token();
+    if (!t) {
+      els.pat.value = "";
+      setStatus(els.tokenStatus, "", "no token stored");
+      return;
+    }
+    els.pat.value = t;
+    setStatus(els.tokenStatus, "ok", "stored · …" + t.slice(-4));
+  }
+
+  function fillTargets() {
+    els.owner.value = CONFIG.owner;
+    els.repo.value = CONFIG.repo;
+    els.branch.value = CONFIG.branch;
+    els.path.value = CONFIG.path;
+  }
+
+  function apiBase() {
+    return (
+      "https://api.github.com/repos/" +
+      encodeURIComponent(els.owner.value.trim()) +
+      "/" +
+      encodeURIComponent(els.repo.value.trim()) +
+      "/contents/"
+    );
+  }
+
+  function headers() {
+    var h = {
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+    };
+    var t = token();
+    if (t) h.Authorization = "Bearer " + t;
+    return h;
+  }
+
+  function readJson(response) {
+    return response.json().then(function (body) {
+      if (!response.ok) {
+        var msg = (body && body.message) || response.statusText || "request failed";
+        throw new Error(msg);
+      }
+      return body;
+    });
+  }
+
+  function getSha(path) {
+    var url =
+      apiBase() +
+      path.split("/").map(encodeURIComponent).join("/") +
+      "?ref=" +
+      encodeURIComponent(els.branch.value.trim());
+    return fetch(url, { headers: headers() }).then(function (response) {
+      if (response.status === 404) return null;
+      return readJson(response).then(function (meta) {
+        return meta.sha;
+      });
+    });
+  }
+
+  function putFile(path, base64, message) {
+    return getSha(path).then(function (sha) {
+      var payload = {
+        message: message,
+        content: base64,
+        branch: els.branch.value.trim(),
+      };
+      if (sha) payload.sha = sha;
+      return fetch(apiBase() + path.split("/").map(encodeURIComponent).join("/"), {
+        method: "PUT",
+        headers: Object.assign({ "Content-Type": "application/json" }, headers()),
+        body: JSON.stringify(payload),
+      }).then(readJson);
+    });
+  }
+
+  function loadImage(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onerror = function () {
+        reject(new Error("could not read that file"));
+      };
+      reader.onload = function () {
+        var img = new Image();
+        img.onerror = function () {
+          reject(new Error("that file is not an image"));
+        };
+        img.onload = function () {
+          resolve(img);
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function squareJpeg(img) {
+    var size = CONFIG.avatarSize;
+    var canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    var side = Math.min(img.width, img.height);
+    if (!side) throw new Error("image has no size");
+    canvas
+      .getContext("2d")
+      .drawImage(
+        img,
+        (img.width - side) / 2,
+        (img.height - side) / 2,
+        side,
+        side,
+        0,
+        0,
+        size,
+        size
+      );
+    return new Promise(function (resolve, reject) {
+      canvas.toBlob(
+        function (blob) {
+          if (blob) resolve(blob);
+          else reject(new Error("could not encode image"));
+        },
+        "image/jpeg",
+        CONFIG.jpegQuality
+      );
+    });
+  }
+
+  function blobToBase64(blob) {
+    return blob.arrayBuffer().then(function (buffer) {
+      var bytes = new Uint8Array(buffer);
+      var bin = "";
+      for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin);
+    });
+  }
+
+  function showPreview(blob) {
+    pendingBlob = blob;
+    var url = URL.createObjectURL(blob);
+    els.previewImg.onload = function () {
+      URL.revokeObjectURL(url);
+    };
+    els.previewImg.src = url;
+    els.previewImg.hidden = false;
+    els.previewEmpty.hidden = true;
+    els.upload.disabled = !token();
+  }
+
+  function clearPreview() {
+    pendingBlob = null;
+    els.previewImg.hidden = true;
+    els.previewImg.removeAttribute("src");
+    els.previewEmpty.hidden = false;
+    els.upload.disabled = true;
+  }
+
+  els.store.addEventListener("click", function () {
+    var value = els.pat.value.trim();
+    if (!value) {
+      setStatus(els.tokenStatus, "err", "paste a token first");
+      return;
+    }
+    window.localStorage.setItem(CONFIG.tokenKey, value);
+    paintTokenStatus();
+    if (pendingBlob) els.upload.disabled = false;
+  });
+
+  els.forget.addEventListener("click", function () {
+    window.localStorage.removeItem(CONFIG.tokenKey);
+    paintTokenStatus();
+    els.upload.disabled = true;
+  });
+
+  els.file.addEventListener("change", function () {
+    var file = els.file.files && els.file.files[0];
+    setStatus(els.uploadStatus, "", "");
+    if (!file) {
+      clearPreview();
+      return;
+    }
+    setStatus(els.uploadStatus, "", "preparing…");
+    loadImage(file)
+      .then(squareJpeg)
+      .then(function (blob) {
+        showPreview(blob);
+        setStatus(
+          els.uploadStatus,
+          "ok",
+          "ready · " + Math.round(blob.size / 1024) + " KB JPEG"
+        );
+      })
+      .catch(function (err) {
+        clearPreview();
+        setStatus(els.uploadStatus, "err", err.message || String(err));
+      });
+  });
+
+  els.upload.addEventListener("click", function () {
+    if (!pendingBlob) {
+      setStatus(els.uploadStatus, "err", "choose an image first");
+      return;
+    }
+    if (!token()) {
+      setStatus(els.uploadStatus, "err", "store a token first");
+      return;
+    }
+    var path = els.path.value.trim().replace(/^\/+/, "");
+    if (!path) {
+      setStatus(els.uploadStatus, "err", "path is required");
+      return;
+    }
+    els.upload.disabled = true;
+    setStatus(els.uploadStatus, "", "uploading…");
+    blobToBase64(pendingBlob)
+      .then(function (b64) {
+        return putFile(path, b64, "holding: update avatar");
+      })
+      .then(function (result) {
+        var commitUrl =
+          result && result.commit && result.commit.html_url
+            ? result.commit.html_url
+            : null;
+        var msg = "done";
+        if (commitUrl) {
+          msg =
+            'done · <a href="' +
+            commitUrl +
+            '" target="_blank" rel="noopener">commit</a> · Pages ~1 min';
+        } else {
+          msg = "done · Pages can take ~1 minute to show the new image";
+        }
+        setStatus(els.uploadStatus, "ok", msg);
+        els.upload.disabled = false;
+      })
+      .catch(function (err) {
+        setStatus(els.uploadStatus, "err", err.message || String(err));
+        els.upload.disabled = false;
+      });
+  });
+
+  fillTargets();
+  paintTokenStatus();
+  clearPreview();
+})();
+  </script>
+</body>
+</html>
