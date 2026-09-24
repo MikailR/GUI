@@ -197,16 +197,26 @@ img { display: block; max-width: 100%; }
 }
 
 .name {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-size: clamp(28px, 7vw, 34px);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.05;
 }
 
-.builder {
+.headline {
   margin: 0;
   font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.builder {
+  position: relative;
+  margin: 18px 0 0;
+  font-size: 14px;
   line-height: 1.55;
   color: var(--ink-2);
   font-weight: 400;

@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0b0b0f" />
   <meta name="color-scheme" content="dark" />
-  <meta name="description" content="Mikail — Waterloo alum. Building a personal OS. Desktop &amp; simple modes coming." />
+  <meta name="description" content="Mikail — Waterloo CS, math, and physics alum. Desktop &amp; simple modes coming." />
   <meta property="og:title" content="Mikail" />
-  <meta property="og:description" content="Waterloo CS / math / physics alum. Ships hackathons &amp; prototypes. Site rebuild in progress." />
+  <meta property="og:description" content="I build small systems and swap the skin later." />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
   <title>Mikail</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,23 +24,33 @@
   </div>
 
   <main class="shell">
-    <article class="card" role="region" aria-label="Site holding page">
+    <article class="card" role="region" aria-label="Site holding page"
+      data-profile-id="profile-mikail"
+      data-avatar-media-id="media-portrait-seed">
       <div class="card-sheen" aria-hidden="true"></div>
 
       <header class="identity">
-        <div class="avatar-wrap" aria-hidden="true">
-          <img class="avatar" src="./assets/avatar.jpg" alt="" width="88" height="88" decoding="async" />
-          <span class="avatar-rim"></span>
+        <div class="avatar-wrap">
+          <img
+            class="avatar"
+            src="./assets/portrait-seed.svg"
+            alt="Warm geometric stand-in portrait"
+            width="88"
+            height="88"
+            decoding="async"
+          />
+          <span class="avatar-rim" aria-hidden="true"></span>
         </div>
         <div class="identity-text">
           <p class="wip"><span class="wip-dot" aria-hidden="true"></span> Rebuild in progress</p>
           <h1 class="name">Mikail</h1>
-          <p class="builder">
-            Waterloo CS / math / physics alum.
-            Ships hackathons &amp; prototypes — usually things I’m not qualified to build yet.
-          </p>
+          <p class="headline">I build small systems and swap the skin later.</p>
         </div>
       </header>
+
+      <p class="builder">
+        Waterloo CS, math, and physics alum. Builds tools, games, and small systems.
+      </p>
 
       <p class="teaser">
         <span class="teaser-kicker">Next</span>
@@ -55,23 +64,23 @@
           </span>
           GitHub
         </a>
-        <a class="cta" href="mailto:hello@mikail.xyz">
-          <span class="cta-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="3" width="13" height="10" rx="2"/><path d="m2.5 4.5 5.5 4 5.5-4"/></svg>
-          </span>
-          Email
-        </a>
-        <a class="cta" href="https://x.com/mikail_xyz" rel="noopener noreferrer">
-          <span class="cta-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor"><path d="M12.6 1.5h2.2L9.7 7.1 15.5 14.5h-4.5L7.6 9.9 3.6 14.5H1.4l5.4-5.9L1 1.5h4.6l3.2 4.2 3.8-4.2Zm-.8 11.7h1.2L4.3 2.7H3L11.8 13.2Z"/></svg>
-          </span>
-          X
-        </a>
         <a class="cta cta-lab" href="https://mikailr.github.io/GUI/" rel="noopener noreferrer">
           <span class="cta-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2.5" width="12" height="9" rx="1.5"/><path d="M5 14.5h6M8 11.5v3"/></svg>
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5.5 11.5h5M4 3.5h8v6.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V3.5Z"/><path d="M6.5 3.5V2.75a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75V3.5"/></svg>
           </span>
           Lab
+        </a>
+        <a class="cta" href="https://www.mikail.xyz/demos/particles/" rel="noopener noreferrer">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><circle cx="4" cy="5" r="1.2"/><circle cx="9" cy="3.5" r="1"/><circle cx="12.5" cy="7" r="1.3"/><circle cx="6.5" cy="10" r="1.1"/><circle cx="11" cy="12" r="0.9"/></svg>
+          </span>
+          Particles
+        </a>
+        <a class="cta" href="https://www.mikail.xyz/demos/perlin/" rel="noopener noreferrer">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1.5 10c1.5-3 3-4.5 4.5-3s2.5 4 4 2.5 2.5-4 4.5-3.5"/></svg>
+          </span>
+          Perlin
         </a>
       </nav>
 

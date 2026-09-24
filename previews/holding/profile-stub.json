@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "id": "profile-mikail",
+    "slug": "mikail",
+    "kind": "profile",
+    "title": "About",
+    "summary": "Waterloo CS, math, and physics alum. Builds tools, games, and small systems.",
+    "tags": ["about", "waterloo", "builder"],
+    "publishedAt": "2026-09-01",
+    "updatedAt": "2026-09-21",
+    "status": "published",
+    "displayName": "Mikail",
+    "headline": "I build small systems and swap the skin later.",
+    "bio": "University of Waterloo alum — computer science, with math and physics in the mix. I like making tools, games, and small systems, then trying a different surface on the same material.\n\nInterests I keep coming back to: hackathons, music, boxing, cooking, robotics, and markets. This site owns the writing and work once so different frontends can wear it.",
+    "location": "Canada",
+    "email": null,
+    "avatarMediaId": "media-portrait-seed",
+    "socials": [
+      { "label": "GitHub", "url": "https://github.com/MikailR", "network": "github" },
+      { "label": "mikail.xyz", "url": "https://mikail.xyz", "network": "web" }
+    ]
+  },
+  "avatarMedia": {
+    "id": "media-portrait-seed",
+    "slug": "portrait-seed",
+    "kind": "media",
+    "title": "Portrait (seed)",
+    "summary": "Stand-in profile image in the shared media store.",
+    "tags": ["about", "portrait"],
+    "publishedAt": "2026-09-21",
+    "updatedAt": "2026-09-21",
+    "status": "published",
+    "mediaType": "image",
+    "src": "/media/portrait-seed.svg",
+    "facets": ["about"],
+    "caption": "Geometric stand-in until a real portrait lands.",
+    "cover": { "src": "/media/portrait-seed.svg", "alt": "Warm geometric stand-in portrait" }
+  }
+}
