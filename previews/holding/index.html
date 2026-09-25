@@ -68,6 +68,7 @@
       color: var(--muted);
       letter-spacing: -0.02em;
     }
+    [hidden] { display: none !important; }
     h1 {
       margin: 0 0 0.75rem;
       font-size: clamp(1.75rem, 5vw, 2.25rem);
@@ -80,6 +81,7 @@
       font-size: 1.05rem;
       line-height: 1.5;
       color: var(--muted);
+      overflow-wrap: anywhere;
     }
     hr {
       border: 0;
@@ -105,10 +107,11 @@
     <p class="label">mikail.xyz</p>
     <div class="face" aria-hidden="true">
       <img id="avatar" alt="" width="88" height="88" hidden />
-      <div id="fallback" class="face-fallback">M</div>
+      <div id="fallback" class="face-fallback" hidden>M</div>
     </div>
     <h1>Mikail</h1>
-    <p class="note">Site under construction. Back soon.</p>
+    <!-- Hardcoded fallback; replaced from site.json when it loads. -->
+    <p class="note" id="headline">Site under construction. Back soon.</p>
     <hr />
     <a href="https://github.com/MikailR">GitHub</a>
   </main>
@@ -116,16 +119,41 @@
     (function () {
       var img = document.getElementById("avatar");
       var fallback = document.getElementById("fallback");
-      img.onload = function () {
-        img.hidden = false;
-        fallback.hidden = true;
-      };
-      img.onerror = function () {
+      var headline = document.getElementById("headline");
+
+      function showFallback() {
         img.removeAttribute("src");
         img.hidden = true;
         fallback.hidden = false;
-      };
-      img.src = "avatar.jpg?v=" + Date.now();
+      }
+
+      function loadAvatar(version) {
+        img.onload = function () {
+          fallback.hidden = true;
+          img.hidden = false;
+        };
+        img.onerror = showFallback;
+        // Versioned URL: a new upload changes avatarVersion, so the browser
+        // can never serve a stale copy from its own cache.
+        img.src = "avatar.jpg?v=" + encodeURIComponent(version);
+      }
+
+      fetch("site.json?t=" + Date.now(), { cache: "no-store" })
+        .then(function (res) {
+          if (!res.ok) throw new Error("site.json " + res.status);
+          return res.json();
+        })
+        .then(function (site) {
+          if (site && typeof site.headline === "string" && site.headline.trim()) {
+            headline.textContent = site.headline; // plain text only
+          }
+          if (site && site.avatarVersion) loadAvatar(String(site.avatarVersion));
+          else showFallback();
+        })
+        .catch(function () {
+          // No site.json: keep the default headline, still try the photo.
+          loadAvatar(String(Date.now()));
+        });
     })();
   </script>
 </body>
